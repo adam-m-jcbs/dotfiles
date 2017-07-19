@@ -5,6 +5,8 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+#TODO: Turn reused code into functions
+
 ### Global definitions (valid for all systems)
 
 # aliases
@@ -64,4 +66,33 @@ if [ `hostname` = "xrb.pa.msu.edu" ]; then
 
    #nvim's on xrb, so use it
    export EDITOR=nvim
+fi
+
+### iCER / HPCC configuration
+if [[ `hostname` = gateway-* ]]; then
+   # Custom prompt
+   #    From Mike: prompt -- this gets the git branch in the prompt
+   #    we also use some coloring.  Note that we need to put the 
+   #    coloring escape codes inside \[ \], otherwise, bash will include
+   #    them in the line length calculation and things will be messed up.
+   # If you can't find an install of git-prompt.sh, you can get it with e.g.
+   #    $ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+   source ~/.git-prompt.sh
+   export GIT_PS1_SHOWDIRTYSTATE=1
+   export PS1='[\u@\h \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+   
+   # Make SkyNet and Kepler packages available in python
+   export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
+   
+   # Initialize Kepler environment variables
+   export KEPLER_PATH=${CODEBASE}/kepler
+   export KEPLER_DATA=$KEPLER_PATH/local_data/
+   # Mongo is used for Kepler visualization/plotting
+   MONGO_VERSION='mongo'
+   MONGO_PATH=$KEPLER_PATH/$MONGO_VERSION
+   export HELPFILE=$MONGO_PATH/help.dat
+   export MONGOPS=$MONGO_PATH/postscript/
+   export FONTDAT=$MONGO_PATH/fonts.dat
+   export FONTNEW=$MONGO_PATH/fonts.vis
+
 fi
