@@ -81,6 +81,9 @@ if [[ `hostname` = gateway-* ]]; then
    source ~/.git-prompt.sh
    export GIT_PS1_SHOWDIRTYSTATE=1
    export PS1='[\u@\h \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+   # Similar for bash autocomplete:
+   #    $ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+   source ~/.git-completion.bash
    
    # Make SkyNet and Kepler packages available in python
    export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
