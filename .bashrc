@@ -48,9 +48,9 @@ if [ `hostname` = "xrb.pa.msu.edu" ]; then
    export PATH=/opt/pgi/linux86-64/17.4/bin:$PATH
    export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
    
-   # Make SkyNet and Kepler packages available in python
-   export PYTHONPATH=/opt/skynet/lib:${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
-   
+   # Make packages available in python
+   export PYTHONPATH=/opt/skynet/lib:${CODEBASE}/kepler/python_scripts:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
+  
    # Initialize Kepler environment variables
    export KEPLER_PATH=${CODEBASE}/kepler
    export KEPLER_DATA=$KEPLER_PATH/local_data/
@@ -64,6 +64,10 @@ if [ `hostname` = "xrb.pa.msu.edu" ]; then
 
    export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
                              #note xrb has 6 physical cores, 12 logical
+
+   #Make RubyGems available, for Jekyll
+   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+   export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
    #nvim's on xrb, so use it
    export EDITOR=nvim
