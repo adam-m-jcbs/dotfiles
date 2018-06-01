@@ -195,7 +195,7 @@ if !has('nvim')
 
     " esoteric settings I never needed in my vimrc, set for nvim/vim consistency
     set nolangremap   
-    set listchars=tab:> ,trail:-,nbsp:+
+    set listchars=tab:>\ ,trail:-,nbsp:+
     set nrformats=bin,hex
     set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
     set ttyfast
