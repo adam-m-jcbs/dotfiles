@@ -11,7 +11,8 @@
 "   + Language and Filetype Settings 
 "   + Mappings, Functions, and Other Custom Definitions
 
-" (the following comes from: http://vim.wikia.com/wiki/Vim_as_a_system_interpreter_for_vimscript )
+" Testing this and other .vim files:
+" (http://vim.wikia.com/wiki/Vim_as_a_system_interpreter_for_vimscript)
 " You can use vim like a system interpreter to test this file and other
 " vimscripts (usually .vim files) from the commandline with:
 " $ vim -i NONE -u NORC -U NONE -V1 -nNesS file.vim -c'echo""|qall!' -- args...
@@ -31,10 +32,11 @@
 "               and vimscript.  See also -E (for some extras that you don't
 "               usually need when testing a single script).
 "       -s  --> When in ex mode, this makes vim behave more like an interpreter.
-"               It means an editor window won't be opened, all standard output is
-"               suppressed (which is why we want -V1 above), rc initialization is
-"               suppressed (hence some of the above being redundant), and causes exit
-"               code from vim to reflect if the given commands run without error.
+"               It means an editor window won't be opened, all standard output
+"               is suppressed (which is why we want -V1 above), rc
+"               initialization is suppressed (hence some of the above being
+"               redundant), and causes exit code from vim to reflect if the
+"               given commands run without error.
 "       -S file.vim 
 "           --> Source input from file.vim.
 "   -c'echo""|qall!'
@@ -45,8 +47,7 @@
 " So more concisely, we can do
 " $ vim -i NONE -V1 -nNesS file.vim -c'echo""|qall!'
 
-" vim namespace conventions (not sure if purely convention or if syntactically
-" implemented):
+" vim namespace conventions:
 "   g: - Global.
 "   l: - Local to a function.
 "   s: - Local to a script file.
@@ -55,6 +56,8 @@
 "   b: - Local to the current buffer.
 "   w: - Local to the current window.
 "   t: - Local to the current tab page.
+
+" WARNING: This vimrc caused vim 7.2 to break (random ABRT signals).
 
 "==============================================================================
 " Initialization and Installation
@@ -84,7 +87,9 @@ let s:fresh_install=0
 " Make sure vim-plug is installed, if not install it.
 if empty(glob(s:nvim_plug_script))
     " Install vim-plug
-    let s:plug_install_cmd='silent !curl -fLo ' . s:nvim_plug_script . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    let s:plug_install_cmd='silent !curl -fLo ' . s:nvim_plug_script
+        \. ' --create-dirs '
+        \. 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     execute s:plug_install_cmd
    
     " Make needed directory
@@ -105,7 +110,8 @@ endif
 if empty(glob(s:vim_plug_script))
     let s:mkdir_cmd = 'silent !mkdir -p ' . fnamemodify(s:vim_plug_script, ':h')
     execute s:mkdir_cmd
-    let s:plug_ln_cmd='silent !ln -s ' . s:nvim_plug_script . ' ' . s:vim_plug_script
+    let s:plug_ln_cmd='silent !ln -s ' . s:nvim_plug_script . ' '
+        \. s:vim_plug_script
     execute s:plug_ln_cmd
     let s:fresh_install=1
     " TODO: It is possible that there is an existing installation of vim-plug
@@ -139,7 +145,10 @@ if filereadable(expand(s:nvim_plug_script))
  
     " File, buffer, tag browser.  Very popular among vimmers.
     Plug 'ctrlpvim/ctrlp.vim'
- 
+
+    " Adds ability to toggle right sidebar with tags displayed
+    Plug 'majutsushi/tagbar'
+
     "TODO consider these plugins
     "Plugin 'NLKNguyen/papercolor-theme'
     "taglist
@@ -171,11 +180,11 @@ if filereadable(expand(s:nvim_plug_script))
 endif
 
 if !has('nvim')
-    " If we're not in neovim, use the same defaults as neovim.
-    "   Some options may be set again later.  This just makes sure that after this
-    "   point there should be consistency between using this vimrc in vim and
-    "   neovim.
-    set backspace=indent,eol,start   " allow backspacing over everything in insert mode
+    " If we're not in neovim, use the same defaults as neovim.  Some options may
+    " be set again later.  This just makes sure that after this point there
+    " should be consistency between using this vimrc in vim and neovim.
+    set backspace=indent,eol,start   " allow backspacing over everything
+                                     " in insert mode
     set history=10000 " keep 10000 lines of command line history (maximum)
     set ruler         " show the cursor position all the time
     set showcmd       " display incomplete commands
@@ -183,7 +192,7 @@ if !has('nvim')
     if has('mouse')
        set mouse=a    " allow use of mouse when available
     endif
-    set autoindent    " automatically insert indentation from current line in new line
+    set autoindent    " automatically insert indentation
     set laststatus=2  " keeps a persistent status bar at bottom of screen
     set smarttab      " keep things lined up when pressing tab
     set autoread      " auto reload a file when changed externally
@@ -205,7 +214,7 @@ endif
 if s:fresh_install
     execute "PlugInstall --sync"
 
-    " TODO: After sufficient testing, delete the note and commented out autocmd line.
+    " TODO: After sufficient testing, clean up.
     " NOTE: I'm using this if-block to force an install before reading the rest
     " of the vimrc.  Otherwise, things like setting the colorscheme won't work
     " because the colorscheme hasn't been installed yet.  If you have problems
@@ -218,9 +227,9 @@ endif
 " UI, Options Configuration, Themes, and Colors
 "==============================================================================
 
-"#################### ^^^^^ CONFIG TO INTEGRATE
 " TODO add comment out macro
-" TODO make macro/function/whatev to toggle relativenumbers In insert mode use absolute numbers, when you go back to normal change to relative
+" TODO make macro/function/whatev to toggle relativenumbers In insert mode use
+"   absolute numbers, when you go back to normal change to relative
 "autocmd InsertEnter * :set norelativenumber
 "autocmd InsertLeave * :set relativenumber
 " TODO: Configure reasonable backups/ohshitsaves
@@ -240,8 +249,8 @@ set formatoptions=tcqrjl
 " r         Automatically insert the current comment leader
 "           after hitting <Enter> in Insert mode. 
 " j	        Where it makes sense, remove a comment leader when joining lines.
-" l         Long lines are not broken in insert mode: When a line was longer than
-"           'textwidth' when the insert command started, Vim does not
+" l         Long lines are not broken in insert mode: When a line was longer
+"           than 'textwidth' when the insert command started, Vim does not
 "           automatically format it.
 set nowrap        " don't visually wrap lines
 set spell         " activate spell-checking
@@ -259,6 +268,7 @@ set smartcase
 augroup init_reload
     au!
     au BufWritePost init.vim so $MYVIMRC
+    au BufWritePost .vimrc so $MYVIMRC
     " TODO/NOTE: This may break if in vim and .vimrc isn't linked to init.vim
 augroup END
 syntax on " Enable syntax highlighting
@@ -281,14 +291,73 @@ colorscheme elda
 "colorscheme lucius "needs `set background=dark`
 
 " Configure airline
-let g:airline_powerline_fonts = 1 " Note: you need patched fonts installed for this to work.
-                                  " Many distros have a powerline package including them, otherwise you need to see powerline docs
-let g:airline_theme='raven'       " See :help airline-themes-list for full list of themes, some of my favorites are commented out below
+"let g:airline_powerline_fonts = 1 " Note: you need patched fonts or fontconfig
+                                  " files installed for this to work.
+                                  " Many distros have a powerline package
+                                  " including them, otherwise you need to see
+                                  " powerline docs.  To make this as portable to
+                                  " as many machines as possible (especially
+                                  " those the user doesn't have root access to),
+                                  " I've decided to go with the less pretty,
+                                  " more readily available airline defaults.
+
+let g:airline_symbols_ascii = 1
+"let g:airline_theme='raven'       " See :help airline-themes-list for full list
 "let g:airline_theme='luna'
 "let g:airline_theme='papercolor'
 "let g:airline_theme='bubblegum'
 "let g:airline_theme='wombat'
 "let g:airline_theme='base16color'
+let g:airline_theme='tomorrow'
+
+" Don't display file encoding if it's the expected 'utf-8[unix]'
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+
+" Here we explicitly set airline symbols, usually to the default, allowing for
+" easy customization.
+"if !exists('g:airline_symbols')
+"  let g:airline_symbols = {}
+"endif
+"
+"" unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.crypt = '🔒'
+"let g:airline_symbols.linenr = '☰'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.maxlinenr = ''
+""let g:airline_symbols.maxlinenr = '㏑'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.spell = ''
+"let g:airline_symbols.notexists = '*'
+"let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = '☰'
+"let g:airline_symbols.maxlinenr = ''
+
+" Airline uses this symbol to indicate you have gives in the git branch that
+" aren't committed/pushed.  The default is ugly, and * is also used by git's
+" shell prompt, so use it.
+"let g:airline_symbols.notexists = '*'
+
+" By default, airline warns about trailing spaces.  I don't care.  So define the
+" whitespace checks and remove 'trailing'
+let g:airline#extensions#whitespace#checks = [ 'indent', 'long', 
+                                             \'mixed-indent-file' ]
 
 "==============================================================================
 " Browsing, Buffers, Panes, and Tabs
@@ -299,14 +368,17 @@ let g:airline_theme='raven'       " See :help airline-themes-list for full list 
 let g:netrw_liststyle=3       " Default to a tree list view
 let g:netrw_banner=0          " Get rid of the banner
 let g:netrw_browse_split = 4  " Open files in the previous window
-let g:netrw_winsize = 15      " Set the width of the netrw window to 15% of the screen width
+let g:netrw_winsize = 15      " Set the width of the netrw window
+                              " to 15% of the screen width
 
 if has('nvim')
    " Configure terminal emulator buffers
    augroup term_em
       au!
-      autocmd BufWinEnter,WinEnter term://* startinsert   " Always start in insert mode when moving to a terminal buffer
-      autocmd TermOpen             *        set nospell   " Turn off spell checking in terminal buffer
+      " Always start in insert mode when moving to a terminal buffer
+      autocmd BufWinEnter,WinEnter term://* startinsert
+      " Turn off spell checking in terminal buffer
+      autocmd TermOpen             *        set nospell   
    augroup END
 endif 
 
@@ -323,9 +395,9 @@ let mapleader=","
 if has('nvim')
    " Setup some maps for easy terminal navigation, from :help terminal-emulator
    " 
-   " This configuration allows using `Alt+{h,j,k,l}` to navigate between windows no
-   " matter if they are displaying a normal buffer or a terminal buffer in terminal
-   " mode.
+   " This configuration allows using `Alt+{h,j,k,l}` to navigate between windows
+   " no matter if they are displaying a normal buffer or a terminal buffer in
+   " terminal mode.
    :tnoremap <A-h> <C-\><C-n><C-w>h
    :tnoremap <A-j> <C-\><C-n><C-w>j
    :tnoremap <A-k> <C-\><C-n><C-w>k

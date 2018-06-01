@@ -16,6 +16,7 @@ then
   module load python_matplotlib
   module load python_ipython
   module load python_zmq
+  module load vim
 
   # Aliases
   alias ls='ls --color --group-directories-first'
@@ -28,6 +29,7 @@ then
 
   #Load my preferred modules for dtn
   module load globus
+  module load vim
 
   # Aliases
 fi
@@ -50,6 +52,7 @@ then
   module load python_cython
   module load python_h5py
   module load python_yt
+  module load vim
 
   # Aliases
 
@@ -64,6 +67,7 @@ then
 
   #Load my preferred modules
   module load pgi/17.4
+  module load vim
 
   # Aliases
 
