@@ -206,7 +206,7 @@ if !has('nvim')
     "set nolangremap   " This seems to be invalid in even relatively recent vims
                        " (e.g. 7.4)
     set listchars=tab:>\ ,trail:-,nbsp:+
-    set nrformats=bin,hex
+    "set nrformats=bin,hex " Seems to be invalid in even relatively recent vims
     set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize
     set ttyfast
 endif
