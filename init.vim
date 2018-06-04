@@ -280,6 +280,8 @@ syntax on " Enable syntax highlighting
 " you don't properly forward environment information.  Setting terminal colors
 " here can serve as a workaround to still have a pretty terminal.
 set t_Co=256
+set splitbelow    " Default horizontal splits to below current.
+set splitright    " Default vertical splits to right of current.
 
 "" Configure global theme
 colorscheme elda
