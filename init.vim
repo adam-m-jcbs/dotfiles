@@ -108,10 +108,9 @@ endif
 
 " I always install to the neovim location and then softlink to this for vim. 
 if empty(glob(s:vim_plug_script))
-    let s:mkdir_cmd = 'silent !mkdir -p ' . fnamemodify(s:vim_plug_script, ':h')
+    let s:mkdir_cmd = 'silent !mkdir ~/.vim'
     execute s:mkdir_cmd
-    let s:plug_ln_cmd='silent !ln -s ' . s:nvim_plug_script . ' '
-        \. s:vim_plug_script
+    let s:plug_ln_cmd='silent !ln -s ~/.config/nvim/autoload ~/.vim/autoload'
     execute s:plug_ln_cmd
     let s:fresh_install=1
     " TODO: It is possible that there is an existing installation of vim-plug
@@ -148,6 +147,10 @@ if filereadable(expand(s:nvim_plug_script))
 
     " Adds ability to toggle right sidebar with tags displayed
     Plug 'majutsushi/tagbar'
+
+    " One of the most popular syntax-checking tools (remember, you have to
+    " install the checkers themselves separately).
+    Plug 'vim-syntastic/syntastic'
 
     "TODO consider these plugins
     "Plugin 'NLKNguyen/papercolor-theme'
