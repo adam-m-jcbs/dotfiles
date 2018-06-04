@@ -280,9 +280,6 @@ syntax on " Enable syntax highlighting
 " you don't properly forward environment information.  Setting terminal colors
 " here can serve as a workaround to still have a pretty terminal.
 set t_Co=256
-"if &t_Co > 2 || has("gui_running")
-"   syntax on
-"endif
 
 "" Configure global theme
 colorscheme elda
@@ -323,52 +320,17 @@ let g:airline_theme='raven'       " See :help airline-themes-list for full list
 " Don't display file encoding if it's the expected 'utf-8[unix]'
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
-" Here we explicitly set airline symbols, usually to the default, allowing for
-" easy customization.
-"if !exists('g:airline_symbols')
-"  let g:airline_symbols = {}
-"endif
-"
-"" unicode symbols
-"let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-"let g:airline_symbols.crypt = '🔒'
-"let g:airline_symbols.linenr = '☰'
-"let g:airline_symbols.linenr = '␊'
-"let g:airline_symbols.linenr = '␤'
-"let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.maxlinenr = ''
-""let g:airline_symbols.maxlinenr = '㏑'
-"let g:airline_symbols.branch = '⎇'
-"let g:airline_symbols.paste = 'ρ'
-"let g:airline_symbols.paste = 'Þ'
-"let g:airline_symbols.paste = '∥'
-"let g:airline_symbols.spell = ''
-"let g:airline_symbols.notexists = '*'
-"let g:airline_symbols.whitespace = 'Ξ'
-
-" powerline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = '☰'
-"let g:airline_symbols.maxlinenr = ''
-
-" Airline uses this symbol to indicate you have gives in the git branch that
-" aren't committed/pushed.  The default is ugly, and * is also used by git's
-" shell prompt, so use it.
+" TODO: Airline uses this symbol to indicate you have changes in the git branch
+" that aren't committed/pushed:
+"let g:airline_symbols.notexists = 'Ɇ'
+" I would much rather use the '*' used by git's terminal prompt.  Need to figure
+" this out, since just doing this doesn't work:
 "let g:airline_symbols.notexists = '*'
 
 " By default, airline warns about trailing spaces.  I don't care.  So define the
 " whitespace checks and remove 'trailing'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'long', 
                                              \'mixed-indent-file' ]
-
 "==============================================================================
 " Browsing, Buffers, Panes, and Tabs
 "==============================================================================
@@ -376,13 +338,15 @@ let g:airline#extensions#whitespace#checks = [ 'indent', 'long',
 " TODO: default session with file/tag browsing?
 " NOTE: Many people love NERDTree, but until I find a compelling motivation for
 "   adding a new plugin/dependency I'm sticking with the built-in netrw.  This
-"   section pulls from (
+"   section pulls from 
+"   http://ellengummesson.com/blog/2014/02/22/make-vim-really-behave-like-netrw/
 let g:netrw_liststyle=3       " Default to a tree list view
 let g:netrw_banner=0          " Get rid of the banner
-let g:netrw_browse_split = 4  " Open files in the previous window to the right
-let
-let g:netrw_winsize = 15      " Set the width of the netrw window
+let g:netrw_browse_split=4    " Open files in the previous window to the right
+let g:netrw_altv=1
+let g:netrw_winsize=20        " Set the width of the netrw window
                               " to 15% of the screen width
+let g:netrw_list_hide = &wildignore  " Use same wildignore as rest of vim
 
 if has('nvim')
    " Configure terminal emulator buffers
