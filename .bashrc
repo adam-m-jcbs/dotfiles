@@ -7,7 +7,7 @@ fi
 
 #TODO: Turn reused code into functions
 
-### Global definitions (valid for all systems)
+### Global configuration (valid for all systems)
 
 # aliases
 alias ls='ls --color --group-directories-first'
