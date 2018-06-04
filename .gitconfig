@@ -2,4 +2,6 @@
 	name = Adam M. Jacobs
 	email = ajacobs@pa.msu.edu
 [push]
-	default = matching
+    default = matching
+[color]
+    ui = auto
