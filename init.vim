@@ -373,11 +373,14 @@ let g:airline#extensions#whitespace#checks = [ 'indent', 'long',
 " Browsing, Buffers, Panes, and Tabs
 "==============================================================================
 " Configure vim's built-in directory browser, netrw
-" TODO: use nerdtree
 " TODO: default session with file/tag browsing?
+" NOTE: Many people love NERDTree, but until I find a compelling motivation for
+"   adding a new plugin/dependency I'm sticking with the built-in netrw.  This
+"   section pulls from (
 let g:netrw_liststyle=3       " Default to a tree list view
 let g:netrw_banner=0          " Get rid of the banner
-let g:netrw_browse_split = 4  " Open files in the previous window
+let g:netrw_browse_split = 4  " Open files in the previous window to the right
+let
 let g:netrw_winsize = 15      " Set the width of the netrw window
                               " to 15% of the screen width
 

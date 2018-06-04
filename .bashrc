@@ -5,16 +5,13 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-#TODO: Turn reused code into functions
-
-### Global configuration (valid for all systems)
+### Global general configuration (valid for all systems)
 
 # aliases
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
 
 # Paths and configuration used by research codes
-# ASSUMPTION: Codes are put in $HOME/Codebase
 export CODEBASE=${HOME}/Codebase
 export AMREX_HOME=${CODEBASE}/AMReX
 export MICROPHYSICS_HOME=${CODEBASE}/Microphysics
@@ -24,6 +21,35 @@ export ASTRODEV_DIR=${CODEBASE}/AstroDev
 
 # Set preferred editor
 export EDITOR=vim
+
+### Research and code configuration
+
+# Set the root directory for codes associated with my research/teaching/work
+export CODEBASE=${HOME}/Codebase
+
+# AMReX (https://amrex-codes.github.io)
+# and Starkiller (https://github.com/starkiller-astro/) codes
+export AMREX_HOME=${CODEBASE}/AMReX
+export MICROPHYSICS_HOME=${CODEBASE}/Microphysics
+export MAESTRO_HOME=${CODEBASE}/MAESTRO
+export CASTRO_HOME=${CODEBASE}/Castro
+export ASTRODEV_DIR=${CODEBASE}/AstroDev
+
+# Kepler (https://2sn.org/kepler/doc/)
+export KEPLER_PATH=${CODEBASE}/kepler
+export KEPLER_DATA=$KEPLER_PATH/local_data/
+# Mongo is used for Kepler visualization/plotting
+MONGO_VERSION='mongo'
+MONGO_PATH=$KEPLER_PATH/$MONGO_VERSION
+export HELPFILE=$MONGO_PATH/help.dat
+export MONGOPS=$MONGO_PATH/postscript/
+export FONTDAT=$MONGO_PATH/fonts.dat
+export FONTNEW=$MONGO_PATH/fonts.vis
+
+# Populate PYTHONPATH with any available python package directories
+if 
+export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
+
 
 ### xrb configuration
 if [ `hostname` = "xrb.pa.msu.edu" ]; then
@@ -51,17 +77,6 @@ if [ `hostname` = "xrb.pa.msu.edu" ]; then
    # Make packages available in python
    export PYTHONPATH=/opt/skynet/lib:${CODEBASE}/kepler/python_scripts:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
   
-   # Initialize Kepler environment variables
-   export KEPLER_PATH=${CODEBASE}/kepler
-   export KEPLER_DATA=$KEPLER_PATH/local_data/
-   # Mongo is used for Kepler visualization/plotting
-   MONGO_VERSION='mongo'
-   MONGO_PATH=$KEPLER_PATH/$MONGO_VERSION
-   export HELPFILE=$MONGO_PATH/help.dat
-   export MONGOPS=$MONGO_PATH/postscript/
-   export FONTDAT=$MONGO_PATH/fonts.dat
-   export FONTNEW=$MONGO_PATH/fonts.vis
-
    export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
                              #note xrb has 6 physical cores, 12 logical
 
@@ -92,15 +107,4 @@ if [[ `hostname` = gateway-* ]]; then
    # Make SkyNet and Kepler packages available in python
    export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
    
-   # Initialize Kepler environment variables
-   export KEPLER_PATH=${CODEBASE}/kepler
-   export KEPLER_DATA=$KEPLER_PATH/local_data/
-   # Mongo is used for Kepler visualization/plotting
-   MONGO_VERSION='mongo'
-   MONGO_PATH=$KEPLER_PATH/$MONGO_VERSION
-   export HELPFILE=$MONGO_PATH/help.dat
-   export MONGOPS=$MONGO_PATH/postscript/
-   export FONTDAT=$MONGO_PATH/fonts.dat
-   export FONTNEW=$MONGO_PATH/fonts.vis
-
 fi
