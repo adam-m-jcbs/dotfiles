@@ -2,7 +2,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
 fi
 
 ### Global general configuration (valid for all systems)
@@ -11,18 +11,49 @@ fi
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
 
-# Paths and configuration used by research codes
-export CODEBASE=${HOME}/Codebase
-export AMREX_HOME=${CODEBASE}/AMReX
-export MICROPHYSICS_HOME=${CODEBASE}/Microphysics
-export MAESTRO_HOME=${CODEBASE}/MAESTRO
-export CASTRO_HOME=${CODEBASE}/Castro
-export ASTRODEV_DIR=${CODEBASE}/AstroDev
-
 # Set preferred editor
 export EDITOR=vim
 
-### Research and code configuration
+## Configure prompt (PS1)
+function set_ps1 {
+    # Configure bash's prompt $PS1.
+    #
+    # Arguments:
+    # $1 -- full path to local `git-prompt.sh`. Optional, will try to download
+    #       local copy if not provided.
+   
+    # Find or get git-prompt.sh, source it
+    local prompt_script=''
+    if [ ${1##*/} == 'git-prompt.sh' ] && [ -f $1 ]; then
+        # If $1 is a path with filename "git-prompt.sh" and it's readable, use
+        prompt_script=$1
+    else
+        # Otherwise use ~/.git-prompt.sh, download if needed
+        # WARNING/TODO: git-prompt.sh may require git-completion.bash. 
+        #   If so, use this:
+        #   $ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+        #   source ~/.git-completion.bash
+        if [ ! -f ~/.git-prompt.sh ]; then
+            echo "[BASHRC]: Downloading ~/.git-prompt.sh..."
+            curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+            echo "[BASHRC]: Downloaded ~/.git-prompt.sh with status " $?
+        fi
+        prompt_script=~/.git-prompt.sh
+    fi
+    source $prompt_script
+
+    # Customize the prompt using features added by git-prompt.sh
+    export GIT_PS1_SHOWDIRTYSTATE=1    # Show unstaged(*) and staged(+) changes
+    export GIT_PS1_SHOWUPSTREAM="auto" # Upstream status
+                                       #    <  behind
+                                       #    >  ahead
+                                       #    <> diverged
+                                       #    =  up-to-date
+    export GIT_PS1_STATESEPARATOR='|'
+    export PS1='[\u@\h \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+}
+
+## Research and code configuration
 
 # Set the root directory for codes associated with my research/teaching/work
 export CODEBASE=${HOME}/Codebase
@@ -47,20 +78,13 @@ export FONTDAT=$MONGO_PATH/fonts.dat
 export FONTNEW=$MONGO_PATH/fonts.vis
 
 # Populate PYTHONPATH with any available python package directories
-if 
-export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
-
+if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
+    export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
+fi
 
 ### xrb configuration
 if [ `hostname` = "xrb.pa.msu.edu" ]; then
-   # Custom prompt
-   #    From Mike: prompt -- this gets the git branch in the prompt
-   #    we also use some coloring.  Note that we need to put the 
-   #    coloring escape codes inside \[ \], otherwise, bash will include
-   #    them in the line length calculation and things will be messed up.
-   source /usr/share/git-core/contrib/completion/git-prompt.sh
-   export GIT_PS1_SHOWDIRTYSTATE=1
-   export PS1='[\u@\h \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+   set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
    
    # Expose CUDA binaries
    export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
@@ -75,7 +99,7 @@ if [ `hostname` = "xrb.pa.msu.edu" ]; then
    export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
    
    # Make packages available in python
-   export PYTHONPATH=/opt/skynet/lib:${CODEBASE}/kepler/python_scripts:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
+   export PYTHONPATH=/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
   
    export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
                              #note xrb has 6 physical cores, 12 logical
@@ -103,8 +127,4 @@ if [[ `hostname` = gateway-* ]]; then
    # Similar for bash autocomplete:
    #    $ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
    source ~/.git-completion.bash
-   
-   # Make SkyNet and Kepler packages available in python
-   export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
-   
 fi
