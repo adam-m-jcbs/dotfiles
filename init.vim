@@ -251,8 +251,8 @@ set formatoptions=tcqrjl
 "           the current comment leader automatically.
 " q         Allow formatting of comments with "gq".
 " r         Automatically insert the current comment leader
-"           after hitting <Enter> in Insert mode. 
-" j	        Where it makes sense, remove a comment leader when joining lines.
+"           after hitting <Enter> in Insert mode.
+" j         Where it makes sense, remove a comment leader when joining lines.
 " l         Long lines are not broken in insert mode: When a line was longer
 "           than 'textwidth' when the insert command started, Vim does not
 "           automatically format it.
@@ -332,8 +332,12 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
 " By default, airline warns about trailing spaces.  I don't care.  So define the
 " whitespace checks and remove 'trailing'
-let g:airline#extensions#whitespace#checks = [ 'indent', 'long', 
+let g:airline#extensions#whitespace#checks = [ 'indent', 'long',
                                              \'mixed-indent-file' ]
+let g:airline#extensions#tabline#enabled = 2 " always show tabs
+
+
+
 "==============================================================================
 " Browsing, Buffers, Panes, and Tabs
 "==============================================================================
@@ -358,7 +362,7 @@ if has('nvim')
       " Always start in insert mode when moving to a terminal buffer
       autocmd BufWinEnter,WinEnter term://* startinsert
       " Turn off spell checking in terminal buffer
-      autocmd TermOpen             *        set nospell   
+      autocmd TermOpen             *        set nospell
    augroup END
 endif 
 
@@ -386,7 +390,7 @@ if has('nvim')
    :nnoremap <A-j> <C-w>j
    :nnoremap <A-k> <C-w>k
    :nnoremap <A-l> <C-w>l
-   
+
    " ,t --> open a new terminal 10 lines high below the current window
    nnoremap <leader>t :bel 10sp +te<CR>
 endif
