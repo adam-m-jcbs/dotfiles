@@ -301,15 +301,12 @@ let g:airline_powerline_fonts = 1 " NOTE: This requires you have powerline
                                   " fonts installed for your local terminal or
                                   " GUI (e.g. GVIM, MacVim).  It is my current
                                   " understanding that you do NOT need them
-                                  " installed on remote machines, but you will
-                                  " need to properly configure your terminal on
-                                  " remote machines.  For fonts, see
+                                  " installed on remote machines.
+                                  " For fonts, see
                                   " https://github.com/powerline/fonts , but
                                   " it's best to first check if your linux
                                   " distribution's package manager has powerline
-                                  " fonts first.
-" NOTE: For fonts to work remotely... TODO
-
+                                  " fonts.
 
 "let g:airline_symbols_ascii = 1
 let g:airline_theme='raven'       " See :help airline-themes-list for full list
@@ -335,8 +332,6 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'long',
                                              \'mixed-indent-file' ]
 let g:airline#extensions#tabline#enabled = 2 " always show tabs
-
-
 
 "==============================================================================
 " Browsing, Buffers, Panes, and Tabs
