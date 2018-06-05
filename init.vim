@@ -282,6 +282,7 @@ syntax on " Enable syntax highlighting
 set t_Co=256
 set splitbelow    " Default horizontal splits to below current.
 set splitright    " Default vertical splits to right of current.
+set nostartofline " Do not jump to first character with page commands.
 
 "" Configure global theme
 colorscheme elda

@@ -49,7 +49,20 @@ function set_ps1 {
                                        #    >  ahead
                                        #    <> diverged
                                        #    =  up-to-date
-    export GIT_PS1_STATESEPARATOR='|'
+    #export GIT_PS1_STATESEPARATOR='|'
+    # For a complete list of bash PS backslash-escaped special characters see
+    # PROMPTING in bash man page.  The include:
+    #   \e      ASCII escape
+    #   \h      first part of hostname (host.mine.com --> host)
+    #   \H      full hostname
+    #   \n, \r  newline, carriage return
+    #   \t      current time in 24-hour HH:MM:SS format
+    #   \A      same but                HH:MM
+    #   \u      current user's username
+    #   \w      current working directory, $HOME becomes ~
+    #   \W      cwd basename
+    #   \[      start sequence of non-printing characters
+    #   \]      end sequence of non-printing characters
     export PS1='[\u@\h \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
 }
 
