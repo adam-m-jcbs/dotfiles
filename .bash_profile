@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Common for all hosts
+
+# .bashrc is sometimes sourced in login shells, sometimes not.
+# For consistency, just always do it.
+# TODO: Would be nice to only do when needed. Does this mean .bashrc can be
+#   sourced twice?  Will it make my $PATH ugly?
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
 # Titan login shell preferences 
 if [ `expr match "$HOSTNAME" 'titan'` -gt 0 ] 
 then
@@ -19,7 +29,7 @@ then
   module load vim
 fi
 
-#dtn (data transfer nodes) preferences
+# OLCF dtn (data transfer nodes) preferences
 if [ `expr match "$HOSTNAME" 'dtn'` -gt 0 ] 
 then
   echo ".bash_profile: Executing dtn login shell preferences"
@@ -29,7 +39,7 @@ then
   module load vim
 fi
 
-#rhea preferences
+# OLCF rhea preferences
 if [ `expr match "$HOSTNAME" 'rhea'` -gt 0 ] 
 then
   echo ".bash_profile: Executing rhea login shell preferences"
@@ -48,12 +58,9 @@ then
   module load python_h5py
   module load python_yt
   module load vim
-
-  # Doesn't seem to source .bashrc automatically on Rhea
-  source .bashrc
 fi
 
-#summitdev preferences
+# OLCF summitdev preferences
 if [ `expr match "$HOSTNAME" 'summitdev'` -gt 0 ] 
 then
   echo ".bash_profile: Executing summitdev login shell preferences"
@@ -61,9 +68,6 @@ then
   #Load my preferred modules
   module load pgi/17.4
   module load vim
-
-  # Doesn't seem to source .bashrc automatically on summitdev
-  source .bashrc
 fi
 
 # iCER/HPCC login shell preferences 
@@ -81,5 +85,3 @@ then
   #module load matplotlib
   #module load iPython
 fi
-
-#Common for all hosts
