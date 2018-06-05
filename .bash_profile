@@ -71,7 +71,9 @@ then
 fi
 
 # iCER/HPCC login shell preferences 
-if [ `expr match "$HOSTNAME" 'dev-intel16-k80'` -gt 0 ] || [ `expr match "$HOSTNAME" 'dev-intel16'` -gt 0 ] || [ `expr match "$HOSTNAME" 'dev-intel14'` -gt 0 ]
+if  [ `expr match "$HOSTNAME" 'dev-intel16-k80'` -gt 0 ] || 
+    [ `expr match "$HOSTNAME" 'dev-intel16'` -gt 0 ] || 
+    [ `expr match "$HOSTNAME" 'dev-intel14'` -gt 0 ]
 then
   echo ".bash_profile: Executing HPCC login shell preferences"
 
