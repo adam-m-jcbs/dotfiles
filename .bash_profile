@@ -17,9 +17,6 @@ then
   module load python_ipython
   module load python_zmq
   module load vim
-
-  # Aliases
-  alias ls='ls --color --group-directories-first'
 fi
 
 #dtn (data transfer nodes) preferences
@@ -30,8 +27,6 @@ then
   #Load my preferred modules for dtn
   module load globus
   module load vim
-
-  # Aliases
 fi
 
 #rhea preferences
@@ -54,8 +49,6 @@ then
   module load python_yt
   module load vim
 
-  # Aliases
-
   # Doesn't seem to source .bashrc automatically on Rhea
   source .bashrc
 fi
@@ -69,12 +62,24 @@ then
   module load pgi/17.4
   module load vim
 
-  # Aliases
-
   # Doesn't seem to source .bashrc automatically on summitdev
   source .bashrc
 fi
 
+# iCER/HPCC login shell preferences 
+if [ `expr match "$HOSTNAME" 'dev-intel16-k80'` -gt 0 ] || [ `expr match "$HOSTNAME" 'dev-intel16'` -gt 0 ] || [ `expr match "$HOSTNAME" 'dev-intel14'` -gt 0 ]
+then
+  echo ".bash_profile: Executing HPCC login shell preferences"
 
+  #Load my preferred modules
+  module load GNU/6.2
+  module unload Python
+  module load Python3/3.5.0
+  module load git/2.9.0
+  #module load NumPy
+  #module load SciPy
+  #module load matplotlib
+  #module load iPython
+fi
 
 #Common for all hosts
