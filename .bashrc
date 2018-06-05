@@ -96,36 +96,45 @@ if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
 fi
 
 ### xrb configuration
-if [ `hostname` = "xrb.pa.msu.edu" ]; then
-   set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
-   
-   # Expose CUDA binaries
-   export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
-   #I don't think I need these, but for reference I'm commenting out:
-   #export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda-8.0/lib64/stubs:${LD_LIBRARY_PATH}
-   #export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-8.0_Samples/common/inc
-   
-   # Expose PGI installation
-   export PGI=/opt/pgi
-   export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat
-   export PATH=/opt/pgi/linux86-64/17.4/bin:$PATH
-   export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
-   
-   # Make packages available in python
-   export PYTHONPATH=/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
+case `hostname` in
+"xrb.pa.msu.edu")
+    set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
+    
+    # Expose CUDA binaries
+    export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+    #I don't think I need these, but for reference I'm commenting out:
+    #export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda-8.0/lib64/stubs:${LD_LIBRARY_PATH}
+    #export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-8.0_Samples/common/inc
+    
+    # Expose PGI installation
+    export PGI=/opt/pgi
+    export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat
+    export PATH=/opt/pgi/linux86-64/17.4/bin:$PATH
+    export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
+    
+    # Make packages available in python
+    export PYTHONPATH=/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
   
-   export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
-                             #note xrb has 6 physical cores, 12 logical
+    export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
+                              #note xrb has 6 physical cores, 12 logical
 
-   #Make RubyGems available, for Jekyll
-   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
-   export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+    #Make RubyGems available, for Jekyll
+    export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+    export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
-   #nvim's on xrb, so use it
-   export EDITOR=nvim
-fi
+    #nvim's on xrb, so use it
+    export EDITOR=nvim
 
+    #annoyingly, vim doesn't come with clipboard, so alias to Fedora's vimx
+    alias vim=vimx
+    ;;
 ### iCER / HPCC configuration
-if [[ `hostname` = gateway-* ]]; then
+"gateway-*")
+    echo 'test gateway'
     set_ps1
-fi
+    ;;
+### default configuration
+*)
+    set_ps1
+    ;;
+esac
