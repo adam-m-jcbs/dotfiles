@@ -14,6 +14,9 @@ alias gist='git status -uno'
 # Set preferred editor
 export EDITOR=vim
 
+# Make local/user binaries, scripts available
+export PATH=${PATH}:${HOME}/.local/bin
+
 ## Configure prompt (PS1)
 function set_ps1 {
     # Configure bash's prompt $PS1.
@@ -24,7 +27,7 @@ function set_ps1 {
    
     # Find or get git-prompt.sh, source it
     local prompt_script=''
-    if [ ${1##*/} == 'git-prompt.sh' ] && [ -f $1 ]; then
+    if [ ${#1} -gt 0 ] && [ ${1##*/} == 'git-prompt.sh' ] && [ -f $1 ]; then
         # If $1 is a path with filename "git-prompt.sh" and it's readable, use
         prompt_script=$1
     else
@@ -95,8 +98,9 @@ if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
     export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
 fi
 
-### xrb configuration
+#Host-by-host customizations
 case `hostname` in
+### xrb configuration
 "xrb.pa.msu.edu")
     set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
     
@@ -128,12 +132,17 @@ case `hostname` in
     #annoyingly, vim doesn't come with clipboard, so alias to Fedora's vimx
     alias vim=vimx
     ;;
-### iCER / HPCC configuration
-"gateway-*")
-    echo 'test gateway'
+## iCER / HPCC configuration
+"gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14")
     set_ps1
+
+    # Make local/user python packages available
+    export PYTHONPATH=${HOME}/.local/lib/python3.3/site-packages:${PYTHONPATH}
+   
+    # Initiate python virtual environment (easier way to get yt going on iCER)
+    source ${HOME}/PyVE/bin/activate
     ;;
-### default configuration
+## default configuration
 *)
     set_ps1
     ;;
