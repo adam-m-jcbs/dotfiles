@@ -1,4 +1,4 @@
-# My former workstation at SBU, still use it for some things
+# My workstation at Stony Brook
 Host sn
    HostName sn.astro.sunysb.edu
    User ajacobs
@@ -20,7 +20,7 @@ Host nscl
 
 # iCER's center with various clusters
 Host hpcc
-   HostName hpcc.msu.edu
+   HostName gateway.hpcc.msu.edu
    User jacob308
 
 # Setup a proxy jump to intel14
@@ -28,6 +28,11 @@ Host intel14_proxy
    HostName dev-intel14
    ProxyJump jacob308@gateway.hpcc.msu.edu 
    User jacob308
+
+# XSEDE login node, from here can get to e.g. Comet w/ gsissh comet
+Host xsede
+    HostName login.xsede.org
+    User ajacobs
 
 # Preferences for all hosts
 Host *
