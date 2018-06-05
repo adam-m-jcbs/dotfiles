@@ -127,17 +127,5 @@ fi
 
 ### iCER / HPCC configuration
 if [[ `hostname` = gateway-* ]]; then
-   # Custom prompt
-   #    From Mike: prompt -- this gets the git branch in the prompt
-   #    we also use some coloring.  Note that we need to put the 
-   #    coloring escape codes inside \[ \], otherwise, bash will include
-   #    them in the line length calculation and things will be messed up.
-   # If you can't find an install of git-prompt.sh, you can get it with e.g.
-   #    $ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
-   source ~/.git-prompt.sh
-   export GIT_PS1_SHOWDIRTYSTATE=1
-   export PS1='[\u@\h \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
-   # Similar for bash autocomplete:
-   #    $ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-   source ~/.git-completion.bash
+    set_ps1
 fi
