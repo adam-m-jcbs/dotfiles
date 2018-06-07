@@ -10,6 +10,7 @@ fi
 # aliases
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
+alias gsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
 
 # Set preferred editor
 export EDITOR=vim
@@ -91,7 +92,7 @@ MONGO_PATH=$KEPLER_PATH/$MONGO_VERSION
 export HELPFILE=$MONGO_PATH/help.dat
 export MONGOPS=$MONGO_PATH/postscript/
 export FONTDAT=$MONGO_PATH/fonts.dat
-export FONTNEW=$MONGO_PATH/fonts.vis
+export FONTNEW=$MONGO_PATH/Kepler scripts.
 
 # Populate PYTHONPATH with any available python package directories
 if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
