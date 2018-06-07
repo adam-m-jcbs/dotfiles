@@ -92,7 +92,7 @@ MONGO_PATH=$KEPLER_PATH/$MONGO_VERSION
 export HELPFILE=$MONGO_PATH/help.dat
 export MONGOPS=$MONGO_PATH/postscript/
 export FONTDAT=$MONGO_PATH/fonts.dat
-export FONTNEW=$MONGO_PATH/Kepler scripts.
+export FONTNEW=$MONGO_PATH/fonts.vis
 
 # Populate PYTHONPATH with any available python package directories
 if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
