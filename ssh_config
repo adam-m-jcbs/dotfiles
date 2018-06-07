@@ -24,6 +24,9 @@ Host hpcc
    User jacob308
 
 # Setup a proxy jump to intel14
+# ProxyJump was introduced in OpenSSH 7.3 (Aug 2016), you'll have to remove this
+# for older ssh.  Don't know of good solution for making this ssh config work on
+# systems with older ssh.
 Host intel14_proxy
    HostName dev-intel14
    ProxyJump jacob308@gateway.hpcc.msu.edu 
