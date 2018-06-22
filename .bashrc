@@ -10,7 +10,7 @@ fi
 # aliases
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
-alias gsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
+alias cdsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
 
 # Set preferred editor
 export EDITOR=vim
