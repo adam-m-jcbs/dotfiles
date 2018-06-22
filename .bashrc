@@ -10,9 +10,13 @@ fi
 # aliases
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
+alias gsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
 
 # Set preferred editor
 export EDITOR=vim
+
+# Make local/user binaries, scripts available
+export PATH=${PATH}:${HOME}/.local/bin
 
 ## Configure prompt (PS1)
 function set_ps1 {
@@ -24,7 +28,7 @@ function set_ps1 {
    
     # Find or get git-prompt.sh, source it
     local prompt_script=''
-    if [ ${1##*/} == 'git-prompt.sh' ] && [ -f $1 ]; then
+    if [ ${#1} -gt 0 ] && [ ${1##*/} == 'git-prompt.sh' ] && [ -f $1 ]; then
         # If $1 is a path with filename "git-prompt.sh" and it's readable, use
         prompt_script=$1
     else
@@ -95,37 +99,52 @@ if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
     export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
 fi
 
+#Host-by-host customizations
+case `hostname` in
 ### xrb configuration
-if [ `hostname` = "xrb.pa.msu.edu" ]; then
-   set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
-   
-   # Expose CUDA binaries
-   export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
-   #I don't think I need these, but for reference I'm commenting out:
-   #export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda-8.0/lib64/stubs:${LD_LIBRARY_PATH}
-   #export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-8.0_Samples/common/inc
-   
-   # Expose PGI installation
-   export PGI=/opt/pgi
-   export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat
-   export PATH=/opt/pgi/linux86-64/17.4/bin:$PATH
-   export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
-   
-   # Make packages available in python
-   export PYTHONPATH=/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
+"xrb.pa.msu.edu")
+    set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
+    
+    # Expose CUDA binaries
+    export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+    #I don't think I need these, but for reference I'm commenting out:
+    #export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/usr/local/cuda-8.0/lib64/stubs:${LD_LIBRARY_PATH}
+    #export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-8.0_Samples/common/inc
+    
+    # Expose PGI installation
+    export PGI=/opt/pgi
+    export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat
+    export PATH=/opt/pgi/linux86-64/17.4/bin:$PATH
+    export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
+    
+    # Make packages available in python
+    export PYTHONPATH=/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
   
-   export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
-                             #note xrb has 6 physical cores, 12 logical
+    export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
+                              #note xrb has 6 physical cores, 12 logical
 
-   #Make RubyGems available, for Jekyll
-   export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
-   export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+    #Make RubyGems available, for Jekyll
+    export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
+    export GEM_HOME=$(ruby -e 'print Gem.user_dir')
 
-   #nvim's on xrb, so use it
-   export EDITOR=nvim
-fi
+    #nvim's on xrb, so use it
+    export EDITOR=nvim
 
-### iCER / HPCC configuration
-if [[ `hostname` = gateway-* ]]; then
+    #annoyingly, vim doesn't come with clipboard, so alias to Fedora's vimx
+    alias vim=vimx
+    ;;
+## iCER / HPCC configuration
+"gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14")
     set_ps1
-fi
+
+    # Make local/user python packages available
+    export PYTHONPATH=${HOME}/.local/lib/python3.3/site-packages:${PYTHONPATH}
+   
+    # Initiate python virtual environment (easier way to get yt going on iCER)
+    source ${HOME}/PyVE/bin/activate
+    ;;
+## default configuration
+*)
+    set_ps1
+    ;;
+esac
