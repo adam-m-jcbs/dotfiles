@@ -1,3 +1,16 @@
+#This is a style file for matplotlib, which replaces much of what was once
+#achieved using rcParams.  You can use it directly by passing this file's path
+#to plt.style.use().  
+
+#For easier use, copy this into mpl_configdir/stylelib.  You
+#can see your configdir path with matplotlib.get_configdir().  Typically,
+#~/.config/matplotlib (which you may need to create).  If you put a
+#<style_name>.mplstyle file here, you can use it with just
+#>>> import matplotlib.pyplot as plt
+#>>> plt.style.use('<style_name>')
+
+#I originally got this file from Ed Brown.
+
 mathtext.fontset : stixsans
 font.family : sans-serif
 font.size : 10
