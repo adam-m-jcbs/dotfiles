@@ -9,8 +9,6 @@
 #>>> import matplotlib.pyplot as plt
 #>>> plt.style.use('<style_name>')
 
-#I have adapted this file from one given to me by Ed Brown.
-
 ### Backend and internals
 # The default backend; one of GTK GTKAgg GTKCairo GTK3Agg GTK3Cairo
 # MacOSX Qt4Agg Qt5Agg TkAgg WX WXAgg Agg Cairo GDK PS PDF SVG
