@@ -2,6 +2,20 @@
 	name = Adam M. Jacobs
 	email = ajacobs@pa.msu.edu
 [push]
-    default = simple
+    #default options: 
+    #   current  - push current branch to remote branch of same name
+    #   nothing  - force error on push that doesn't explicitly give a refspec
+    #   simple   - the baseline default, push current branch to upstream branch
+    #              pulled from, give an error if these two branches aren't the same. If
+    #              pushing to remote other than the remote tracking, act like `current`
+    #   upstream - good for central workflows, push current branch to the branch
+    #              whose changes are usually pulled from (@{upstream}). Branch names may
+    #              differ without error!
+    #   matching - push _all_ branches having the same name on both ends, which
+    #              means this doesn't work with a workflow where you work on one branch at
+    #              a time.
+    default = current
 [color]
     ui = auto
+[diff]
+	submodule = log
