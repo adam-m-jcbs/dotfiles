@@ -19,3 +19,6 @@
     ui = auto
 [diff]
 	submodule = log
+[status]
+    #Add a summary of submodule changes when doing `git status`
+	submodulesummary = 1
