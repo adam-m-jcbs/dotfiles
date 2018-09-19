@@ -38,7 +38,7 @@
 # Compiled languages junk (C/C++, CUDA, Fortran, and make output mostly)
 *.so
 *.o
-*.a  #dangerous?
+*.a
 *.la
 *.pdb
 *.mod
@@ -49,5 +49,5 @@
 __pycache__/
 *.py[cod]
 *.egg
-docs/_build/ #Sphinx
-*.ipynb_checkpoints #Jupyter notebooks using IPy kernel
+docs/_build/
+*.ipynb_checkpoints
