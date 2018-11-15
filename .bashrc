@@ -48,10 +48,14 @@ export HELPFILE=$MONGO_PATH/help.dat
 export MONGOPS=$MONGO_PATH/postscript/
 export FONTDAT=$MONGO_PATH/fonts.dat
 export FONTNEW=$MONGO_PATH/fonts.vis
-
-# Populate PYTHONPATH with Kepler python scripts, if available
 if [ -d "${CODEBASE}/kepler/python_scripts" ]; then
+    # Populate PYTHONPATH with Kepler python scripts, if available
     export PYTHONPATH=${CODEBASE}/kepler/python_scripts:${PYTHONPATH}
+fi
+
+# pynucastro
+if [ -d "${CODEBASE}/pynucastro" ]; then
+    export PYTHONPATH=${CODEBASE}/pynucastro:${PYTHONPATH}
 fi
 
 ## Configure prompt (PS1)
