@@ -33,13 +33,13 @@
 #mathtext.it  : serif:italic
 #mathtext.bf  : serif:bold
 #mathtext.sf  : sans
-mathtext.fontset : stixsans   # Should be 'dejavusans' (default),
+mathtext.fontset : cm        # Should be 'dejavusans' (default),
                               # 'dejavuserif', 'cm' (Computer Modern), 'stix',
                               # 'stixsans' or 'custom'
 #mathtext.fallback_to_cm : True  # When True, use symbols from the Computer Modern
                                  # fonts when a symbol can not be found in one of
                                  # the custom math fonts.
-#mathtext.default : it # The default font to use for math.
+mathtext.default : regular # The default font to use for math.
                        # Can be any of the LaTeX font names, including
                        # the special name "regular" for the same font
                        # used in regular text.
@@ -80,7 +80,15 @@ font.size           : 10.0
 #font.monospace      : DejaVu Sans Mono, Bitstream Vera Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
 
 ### LaTeX customizations. See http://wiki.scipy.org/Cookbook/Matplotlib/UsingTex
-text.usetex         : True    # use latex for all text handling. The following fonts
+#For this to work, you need to have installed and exposed in your $PATH
+#    + LaTeX
+#    + dvipng
+#    + Ghostscript (8.6+ preferred)
+#Note that you do _not_ need this to render basic LaTeX syntax in mpl strings.
+#This is already done by default using mpl's `mathtext`.  Only use this for
+#special use-cases requiring more control or customization than is possible with
+#`mathtext`.
+#text.usetex         : True    # use latex for all text handling. The following fonts
                               # are supported through the usual rc parameter settings:
                               # new century schoolbook, bookman, times, palatino,
                               # zapf chancery, charter, serif, sans-serif, helvetica,
@@ -89,7 +97,7 @@ text.usetex         : True    # use latex for all text handling. The following f
                               # If another font is desired which can loaded using the
                               # LaTeX \usepackage command, please inquire at the
                               # matplotlib mailing list
-#text.latex.unicode : False # use "ucs" and "inputenc" LaTeX packages for handling
+#text.latex.unicode : True  # use "ucs" and "inputenc" LaTeX packages for handling
                             # unicode strings.
 #text.latex.preamble :  # IMPROPER USE OF THIS FEATURE WILL LEAD TO LATEX FAILURES
                             # AND IS THEREFORE UNSUPPORTED. PLEASE DO NOT ASK FOR HELP
@@ -224,7 +232,7 @@ lines.solid_capstyle : round        # butt|round|projecting
 #legend.edgecolor     : 0.8      # background patch boundary color
 #legend.fancybox      : True     # if True, use a rounded box for the
                                  # legend background, else a rectangle
-legend.shadow        : False    # if True, give background a shadow effect
+legend.shadow        : True     # if True, give background a shadow effect
 #legend.numpoints     : 1        # the number of marker points in the legend line
 #legend.scatterpoints : 1        # number of scatter points
 legend.markerscale   : 0.75     # the relative size of legend markers vs. original
@@ -272,7 +280,7 @@ figure.autolayout : True   # When True, automatically adjust subplot
 #savefig.dpi         : figure   # figure dots per inch or 'figure'
 #savefig.facecolor   : white    # figure facecolor when saving
 #savefig.edgecolor   : white    # figure edgecolor when saving
-#savefig.format      : png      # png, ps, pdf, svg
+savefig.format      : pdf      # png, ps, pdf, svg
 #savefig.bbox        : standard # 'tight' or 'standard'.
                                 # 'tight' is incompatible with pipe-based animation
                                 # backends but will workd with temporary file based ones:
@@ -282,7 +290,7 @@ figure.autolayout : True   # When True, automatically adjust subplot
 #savefig.jpeg_quality: 95       # when a jpeg is saved, the default quality parameter.
 #savefig.directory   : ~        # default directory in savefig dialog box,
                                 # leave empty to always use current working directory
-savefig.transparent : True     # setting that controls whether figures are saved with a
+#savefig.transparent : True     # setting that controls whether figures are saved with a
                                 # transparent background by default
 
 # tk backend params
@@ -301,7 +309,7 @@ savefig.transparent : True     # setting that controls whether figures are saved
 # pdf backend params
 #pdf.compression   : 6 # integer from 0 to 9
                        # 0 disables compression (good for debugging)
-#pdf.fonttype       : 3         # Output Type 3 (Type3) or Type 42 (TrueType)
+pdf.fonttype       : 42        # Output Type 3 (Type3) or Type 42 (TrueType)
 
 # svg backend params
 #svg.image_inline : True       # write raster image data directly into the svg file
