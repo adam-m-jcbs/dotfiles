@@ -1,0 +1,53 @@
+#This is a baseline .gitignore that tells git to ignore things I never want to
+#track in any repo.
+#
+#Written with the help of the massive collection of gitignore templates found at
+#https://github.com/github/gitignore , I've only included things that are
+#relevant to my compiled languages, python, TeX, *nix workflows
+
+# (La,Bib)TeX, beamer junk
+*.aux
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.toc
+*.dvi
+*.xdv
+*-converted-to.*
+*.bbl
+*.bcf
+*.blg
+*.nav
+*.snm
+*.soc
+*.idx
+#Potentially dangerous as global, as some codes write to files like this that I
+#may want to track.  Kept here as reference for adapting to specific repos
+#*.log  
+#*.out
+
+# Vim junk
+*~
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+
+# Compiled languages junk (C/C++, CUDA, Fortran, and make output mostly)
+*.so
+*.o
+*.a
+*.la
+*.pdb
+*.mod
+*.ptx 
+*.cubin
+
+# Python junk
+__pycache__/
+*.py[cod]
+*.egg
+docs/_build/
+*.ipynb_checkpoints
