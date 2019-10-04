@@ -6,9 +6,11 @@
 [[ $- != *i* ]] && return
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
+#   NOTE: This broke some stuff for me on some machines.  I'm seeing how going
+#   without it works.  TODO delete this if no problems
+#if [ -f /etc/bashrc ]; then
+#    . /etc/bashrc
+#fi
 
 ### Global general configuration (valid for all systems)
 
@@ -168,10 +170,22 @@ case `hostname` in
     set_ps1
 
     # Make local/user python packages available
-    export PYTHONPATH=${HOME}/.local/lib/python3.3/site-packages:${PYTHONPATH}
+    #export PYTHONPATH=${HOME}/.local/lib/python3.3/site-packages:${PYTHONPATH}
    
     # Initiate python virtual environment (easier way to get yt going on iCER)
     source ${HOME}/PyVE/bin/activate
+    # The interactions between modules and python environment can cause some odd
+    # errors.  One of those is that the PyVE `pip` gets overridden in PATH. I
+    # tried some solutions, but only one I can get to work at the moment is to
+    # alias
+    alias pip=${HOME}/PyVE/bin/pip
+    
+    #annoyingly, default vim build doesn't come with clipboard, so alias to vimx
+    alias vim=vimx
+
+    # Make SLURM's default info reporting better
+    export SACCT_FORMAT="jobid%15,jobname%15,partition,allocnodes,alloccpus,ntasks,state,elapsed,timelimit,start,nodelist"
+
     ;;
 ## default configuration
 *)
