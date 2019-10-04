@@ -28,8 +28,11 @@ Host hpcc
 
 # Setup a proxy jump to intel14
 # ProxyJump was introduced in OpenSSH 7.3 (Aug 2016), you'll have to remove this
-# for older ssh.  Don't know of good solution for making this ssh config work on
-# systems with older ssh.
+# for older ssh.
+#
+# In that case, use ProxyCommand, like:
+# ssh -o ProxyCommand="ssh -W %h:%p jacob308@gateway.hpcc.msu.edu" ajacobs@xrb.pa.msu.edu
+# this tunnels through gateway.hpcc.msu.edu to xrb.pa.msu.edu (which is not accessible off-campus)
 Host intel14_proxy
    HostName dev-intel14
    ProxyJump jacob308@gateway.hpcc.msu.edu 
