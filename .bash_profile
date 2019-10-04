@@ -84,15 +84,11 @@ then
     #    NOTE: some modules are loaded as required according to
     #    `module spider <module>`. This seems to defeat purpose of modules
     module purge #very stupidly, I have to unload modules that iCER loaded for me by default.  Otherwise, my modules break.  Again, isn't this what lmod's for?
-    #module unload ScaLAPACK 
-    #module unload FFTW      #asking, because they break the modules I DO want.
-    #module unload OpenBLAS
-    #module unload Python # recommended in HPCC docs, though I'd think LMOD does this for you.  Seems to not matter anymore
-    #module load powertools binutils Tcl numactl hwloc cURL Perl #These are default modules I want to keep, I think
     module load GNU/7.3.0-2.30 # req'd for Python/3.7.0
     module load OpenMPI/3.1.1 # req'd for Python/3.7.0
     module load Python/3.7.0  # Pre-transition version: Python3/3.5.0
     module load git
+    module load powertools
 fi
 
 
