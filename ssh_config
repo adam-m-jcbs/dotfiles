@@ -1,3 +1,6 @@
+# This is intended to be linked as ~/.ssh/config
+# should have permissions `chmod 600 ssh_config`
+
 # My workstation at Stony Brook
 Host sn
    HostName sn.astro.sunysb.edu
