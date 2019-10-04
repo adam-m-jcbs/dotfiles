@@ -87,3 +87,18 @@ then
     module load Python/3.7.0  # Pre-transition version: Python3/3.5.0
     module load git
 fi
+
+if  [ `expr match "$HOSTNAME" 'comet'` -gt 0 ]
+then
+    echo ".bash_profile: Executing Comet login shell preferences"
+
+    #NOTE: I'm trying out miniconda3 as a way to get a compatible, non-ancient version
+    #of Python instead of modules (they only have up to 3.5, which my code won't
+    #run on).  I'm keeping the below for reference in case this breaks.
+
+    #Load my preferred modules
+    #module purge # sometimes helps thing go smoothly
+    #module load python
+
+    #source ${HOME}/PyVE/bin/activate
+fi
