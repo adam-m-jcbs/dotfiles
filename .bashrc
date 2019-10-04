@@ -166,7 +166,7 @@ case `hostname` in
     export OMP_NUM_THREADS=4
     ;;
 ## iCER / HPCC configuration
-"gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14")
+"gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14" | "dev-intel14-phi" |  "dev-intel14-k20" )
     set_ps1
 
     # Make local/user python packages available
