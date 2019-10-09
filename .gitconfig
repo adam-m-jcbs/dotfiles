@@ -1,6 +1,8 @@
 [user]
 	name = Adam M. Jacobs
 	email = ajacobs@pa.msu.edu
+[core]
+    preloadindex = true
 [push]
     #default options: 
     #   current  - push current branch to remote branch of same name
