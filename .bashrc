@@ -136,7 +136,7 @@ case `hostname` in
     export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.4/man
     
     # Make packages available in python
-    export PYTHONPATH=/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek:${PYTHONPATH}
+    export PYTHONPATH=${PYTHONPATH}:/opt/skynet/lib:${HOME}/Research/Projects/XRB/Sensitivity/analysis/flow/Keek
   
     export OMP_NUM_THREADS=6  #Number of cores is a decent value to use,
                               #note xrb has 6 physical cores, 12 logical
