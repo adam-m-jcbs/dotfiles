@@ -99,7 +99,9 @@
 #c.NotebookApp.browser = ''
 
 ## The full path to an SSL/TLS certificate file.
-c.NotebookApp.certfile = u'/mnt/home/jacob308/.jupyter/security/ipycert.pem'
+# Generate cert and key with something like (expires in 1 year)
+#  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout jubnbkey.key -out jupnbcert.pem 
+c.NotebookApp.certfile = u'/mnt/home/jacob308/.jupyter/security/jupnbcert.pem'
 
 ## The full path to a certificate authority certificate for SSL/TLS client
 #  authentication.
@@ -220,7 +222,8 @@ c.NotebookApp.certfile = u'/mnt/home/jacob308/.jupyter/security/ipycert.pem'
 #c.NotebookApp.kernel_spec_manager_class = 'jupyter_client.kernelspec.KernelSpecManager'
 
 ## The full path to a private key file for usage with SSL/TLS.
-c.NotebookApp.keyfile = u'/mnt/home/jacob308/.jupyter/security/ipykey.key'
+# See c.NotebookApp.certfile comments above for command to generate key
+c.NotebookApp.keyfile = u'/mnt/home/jacob308/.jupyter/security/jupnb.key'
 
 ## Hostnames to allow as local when allow_remote_access is False.
 #  
@@ -528,7 +531,7 @@ c.NotebookApp.port = 41375
 #c.Session.unpacker = 'json'
 
 ## Username for the Session. Default is your system username.
-#c.Session.username = 'jacob308'
+#c.Session.username = 'ajacobs'
 
 #------------------------------------------------------------------------------
 # MultiKernelManager(LoggingConfigurable) configuration
