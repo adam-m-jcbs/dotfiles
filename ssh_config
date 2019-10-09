@@ -26,13 +26,50 @@ Host hpcc
    HostName gateway.hpcc.msu.edu
    User jacob308
 
-# Setup a proxy jump to intel14
+# Setup a proxy jump to iCER machines
 # ProxyJump was introduced in OpenSSH 7.3 (Aug 2016), you'll have to remove this
-# for older ssh.  Don't know of good solution for making this ssh config work on
-# systems with older ssh.
+# for older ssh.
+#
+# In that case, use ProxyCommand.  See xrb_pc below
 Host intel14_proxy
    HostName dev-intel14
    ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+Host intel16_proxy
+   HostName dev-intel16
+   ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+Host intel14k20_proxy
+   HostName dev-intel14-k20
+   ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+Host intel14phi_proxy
+   HostName dev-intel14-phi
+   ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+
+Host xrb
+   HostName xrb.pa.msu.edu
+   User ajacobs
+
+Host xrb_proxy
+   HostName xrb.pa.msu.edu
+   ProxyJump jacob308@gateway.hpcc.msu.edu
+   User ajacobs
+
+# Old way to setup a proxy jump, on the cli:
+# ssh -o ProxyCommand="ssh -W %h:%p jacob308@gateway.hpcc.msu.edu" ajacobs@xrb.pa.msu.edu
+# this tunnels through gateway.hpcc.msu.edu to xrb.pa.msu.edu (which is not accessible off-campus)
+# We can use this in config, as below, to facilitate seamless access to systems
+# behind firewalls.
+Host xrb_pc
+   HostName xrb.pa.msu.edu
+   ProxyCommand ssh -W %h:%p jacob308@gateway.hpcc.msu.edu
+   User ajacobs
+
+Host gitlab.msu.edu
+   HostName gitlab.msu.edu
+   ProxyJump jacob308@gateway.hpcc.msu.edu
    User jacob308
 
 # XSEDE login node, from here can get to e.g. Comet w/ gsissh comet
