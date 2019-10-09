@@ -26,12 +26,24 @@ Host hpcc
    HostName gateway.hpcc.msu.edu
    User jacob308
 
-# Setup a proxy jump to intel14
+# Setup a proxy jump to iCER machines
 # ProxyJump was introduced in OpenSSH 7.3 (Aug 2016), you'll have to remove this
 # for older ssh.  Don't know of good solution for making this ssh config work on
 # systems with older ssh.
 Host intel14_proxy
    HostName dev-intel14
+   ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+Host intel16_proxy
+   HostName dev-intel16
+   ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+Host intel14k20_proxy
+   HostName dev-intel14-k20
+   ProxyJump jacob308@gateway.hpcc.msu.edu 
+   User jacob308
+Host intel14phi_proxy
+   HostName dev-intel14-phi
    ProxyJump jacob308@gateway.hpcc.msu.edu 
    User jacob308
 
