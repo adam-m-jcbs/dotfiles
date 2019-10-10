@@ -24,3 +24,10 @@
 [status]
     #Add a summary of submodule changes when doing `git status`
 	submodulesummary = 1
+[alias]
+    #Pretty yet concise log alternative
+    lg = log --oneline --graph --decorate
+    #Quickly show last commit details
+    last = log -1 HEAD
+    #Status without all the annoying untracked files
+    stat = status -uno
