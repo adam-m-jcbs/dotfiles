@@ -17,6 +17,11 @@
     #              means this doesn't work with a workflow where you work on one branch at
     #              a time.
     default = current
+[pull]
+    #By default, rebase instead of merging when pulling, BUT do preserve local
+    #   merges instead of inlining (this makes the history clean and legible if
+    #   everyone's using git best practices)
+    rebase = merges
 [color]
     ui = auto
 [diff]
