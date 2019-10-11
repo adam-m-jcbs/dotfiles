@@ -173,7 +173,7 @@ case `hostname` in
     #export PYTHONPATH=${HOME}/.local/lib/python3.3/site-packages:${PYTHONPATH}
    
     # Initiate python virtual environment (easier way to get yt going on iCER)
-# source ${HOME}/PyVE/bin/activate  # commented out by conda initialize
+    source ${HOME}/PyVE/bin/activate
     # The interactions between modules and python environment can cause some odd
     # errors.  One of those is that the PyVE `pip` gets overridden in PATH. I
     # tried some solutions, but only one I can get to work at the moment is to
