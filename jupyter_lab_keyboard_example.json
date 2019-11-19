@@ -1,0 +1,61 @@
+{
+    // Note: To disable a system default shortcut,
+    // copy it to User Preferences and add the
+    // "disabled" key, for example:
+    // {
+    //     "command": "application:activate-next-tab",
+    //     "keys": [
+    //         "Ctrl Shift ]"
+    //     ],
+    //     "selector": "body",
+    //     "disabled": true
+    // }
+       
+    // A documented template I made because this stuff is so poorly documented:
+    // {
+    //     //"command" is the defined/registered/named command to be executed
+    //     "command": "terminal:create-new",
+    //     //"keys" defines the keyboard shortcut
+    //     //"chord" key keywords:
+    //     //    Ctrl Shift Accel Alt
+    //     //keywords for specialish keys it's good to keep in mind
+    //     //    Tab Enter Escape ArrowUp ArrowDown
+    //     //"chord" shortcut example
+    //     "keys": [
+    //         "Ctrl Shift ]"
+    //     ],
+    //     //sequence shortcut example
+    //     "keys: [
+    //         "0",
+    //         "0" 
+    //     ],
+    //     //"selector" is like the context the keys were captured in?  not sure
+    //     //"body" seems to be the currently focused part of the NB
+    //     //that captured the key presses
+    //     "selector": "body"
+    //     //no idea what these are, but maybe one day I will.
+    //     //    For now, they're examples of what the Jup devs do
+    //     "selector": ".jp-Activity"
+    //     "selector": ".jp-CodeConsole-promptCell .jp-mod-completer-enabled"
+    //     "selector": ".jp-FileEditor .jp-mod-completer-enabled"
+    //     "selector": ".jp-Notebook.jp-mod-editMode .jp-mod-completer-enabled"
+    //     "selector": ".jp-CodeConsole[data-jp-interaction-mode='notebook']
+    //     .jp-CodeConsole-promptCell"
+    //     "selector": ".jp-CodeConsole[data-jp-interaction-mode='terminal']
+    //     .jp-CodeConsole-promptCell"
+    //     "selector": ".jp-mod-searchable"
+    //     "selector": "[data-jp-undoer]"
+    //     "selector": ".jp-ImageViewer"
+    //     "selector": ".jp-Notebook:focus"
+    // }
+
+    // List of User-Defined (possibly over-written) Keyboard Shortcuts
+    "shortcuts": [
+        {
+            "command": "terminal:create-new",
+            "keys": [
+                "Alt ,"
+            ],
+            "selector": "body"
+        }
+}
