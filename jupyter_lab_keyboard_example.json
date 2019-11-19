@@ -1,3 +1,6 @@
+// This is a template / example file for Jupyter lab settings customization.  You
+// can paste its contents into "User Preferences" from Settings --> Advanced
+// Settings Editor, then go to "Keyboard Shortcuts"
 {
     // Note: To disable a system default shortcut,
     // copy it to User Preferences and add the
@@ -52,6 +55,7 @@
     // List of User-Defined (possibly over-written) Keyboard Shortcuts
     "shortcuts": [
         {
+            // <Alt + ,> spawns a new terminal
             "command": "terminal:create-new",
             "keys": [
                 "Alt ,"
