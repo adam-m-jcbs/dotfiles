@@ -20,6 +20,9 @@ alias gist='git status -uno'
 alias clean_tex='rm *.aux *.log'
 alias cdsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
 
+# use vi bindings for CLI
+set -o vi
+
 # Set preferred editor, pager
 export EDITOR=vim
 export PAGER=less
