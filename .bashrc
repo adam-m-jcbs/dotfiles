@@ -30,6 +30,10 @@ export PAGER=less
 # Make local/user binaries, scripts available
 export PATH=${PATH}:${HOME}/.local/bin
 
+# Enable z "frecency" dir searching, when available
+# TODO: If you like z, then make this auto curl etc like with git-prompt
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
 ## Research and code configuration
 
 # Set the root directory for codes associated with my research/teaching/work
@@ -165,8 +169,13 @@ case `hostname` in
     
     # nvim's available, let's use it!
     export EDITOR=nvim
+    alias vim=nvim
 
     export OMP_NUM_THREADS=4
+
+    # Try this on siona, maybe make global later
+    alias cat="bat"
+    alias ls="exa --group-directories-first"
     ;;
 ## iCER / HPCC configuration
 "gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14" | "dev-intel14-phi" |  "dev-intel14-k20" )
