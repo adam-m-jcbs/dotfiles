@@ -70,14 +70,14 @@ endif
 
 " Define location of vim-plug installations
 " TODO: As of now I hardcode the default known XDG_CONFIG_HOME and
-" XDG_DATA_HOME values:
-"   XDG_CONFIG_HOME --> ~/.config/
-"   XDG_DATA_HOME   --> ~/.local/share,
-" would be better to use environment variables when available.  Some key files
-" and directories I use for nvim are:
-"   $XDG_CONFIG_HOME/nvim/init.vim
-"   $XDG_CONFIG_HOME/nvim/autoload/plug.vim
-"   $XDG_DATA_HOME/nvim/plugged
+"   XDG_DATA_HOME values:
+"     XDG_CONFIG_HOME --> ~/.config/
+"     XDG_DATA_HOME   --> ~/.local/share,
+"   would be better to use environment variables when available.  Some key files
+"   and directories I use for nvim are:
+"     $XDG_CONFIG_HOME/nvim/init.vim
+"     $XDG_CONFIG_HOME/nvim/autoload/plug.vim
+"     $XDG_DATA_HOME/nvim/plugged
 "
 let s:nvim_plug_script='~/.config/nvim/autoload/plug.vim'
 let s:vim_plug_script='~/.vim/autoload/plug.vim'
@@ -151,6 +151,23 @@ if filereadable(expand(s:nvim_plug_script))
     " One of the most popular syntax-checking tools (remember, you have to
     " install the checkers themselves separately).
     Plug 'vim-syntastic/syntastic'
+
+    " This set of plugins was rec'd in 'Vim for Python' on Vim from Scratch website
+    Plug 'scrooloose/nerdtree'
+    Plug 'junegunn/fzf'
+    Plug 'tpope/vim-commentary'
+    Plug 'liuchengxu/vista.vim'
+    Plug 'jeetsukumaran/vim-pythonsense'
+    Plug 'joshdick/onedark.vim'
+    Plug 'Vimjas/vim-python-pep8-indent'
+    Plug 'dense-analysis/ale'
+    if has('nvim')
+        " this breaks for me, for some reason
+        " Plug 'numirias/semshi'
+        Plug 'sheerun/vim-polyglot'
+    else
+        Plug 'sheerun/vim-polyglot'
+    endif
 
     "TODO consider these plugins
     "Plugin 'NLKNguyen/papercolor-theme'
@@ -286,6 +303,7 @@ set nostartofline " Do not jump to first character with page commands.
 
 "" Configure global theme
 colorscheme elda
+"colorscheme onedark
 " Some of my favorites:
 "colorscheme bubblegum-256-dark
 "colorscheme lapis256
@@ -365,6 +383,14 @@ endif
 " Language and Filetype Settings 
 "==============================================================================
 
+"" Python Config
+"fold by indent, pretty decent for Python
+au BufNewFile,BufRead *.py set foldmethod=indent
+"linter for ALE plugin
+"    TODO: Need to change if I want to set this option for multiple languages
+let g:ale_linters={'python':['flake8', 'pylint']}
+let g:ale_fixers={'python': ['standardrb']}
+let g:ale_fix_on_save=1
 
 "==============================================================================
 " Mappings, Functions, and Other Custom Definitions
