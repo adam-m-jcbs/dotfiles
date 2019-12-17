@@ -141,6 +141,7 @@ if filereadable(expand(s:nvim_plug_script))
  
     " A mega-collection of colorschemes
     Plug 'flazz/vim-colorschemes'
+    Plug 'rakr/vim-one'
  
     " File, buffer, tag browser.  Very popular among vimmers.
     Plug 'ctrlpvim/ctrlp.vim'
@@ -153,6 +154,7 @@ if filereadable(expand(s:nvim_plug_script))
     Plug 'vim-syntastic/syntastic'
 
     " This set of plugins was rec'd in 'Vim for Python' on Vim from Scratch website
+    " TODO: Actually use these, learn them, and keep what's good
     Plug 'scrooloose/nerdtree'
     Plug 'junegunn/fzf'
     Plug 'tpope/vim-commentary'
@@ -302,8 +304,9 @@ set splitright    " Default vertical splits to right of current.
 set nostartofline " Do not jump to first character with page commands.
 
 "" Configure global theme
-colorscheme elda
-"colorscheme onedark
+"colorscheme elda
+colorscheme one
+set background=dark " use `light` for light version
 " Some of my favorites:
 "colorscheme bubblegum-256-dark
 "colorscheme lapis256
@@ -327,7 +330,9 @@ let g:airline_powerline_fonts = 1 " NOTE: This requires you have powerline
                                   " fonts.
 
 "let g:airline_symbols_ascii = 1
-let g:airline_theme='raven'       " See :help airline-themes-list for full list
+"let g:airline_theme='raven'       " See :help airline-themes-list for full list
+let g:airline_theme='one'
+
 "let g:airline_theme='tomorrow'
 "let g:airline_theme='luna'
 "let g:airline_theme='papercolor'
