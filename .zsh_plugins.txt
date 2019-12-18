@@ -1,0 +1,19 @@
+# This can work with antibody?  List plugins here, like
+#zsh-users/zsh-completions
+
+#See more at https://github.com/chrissicool/zsh-256color
+chrissicool/zsh-256color
+
+#Z written in zsh, replacement for cd that uses 'frecency'
+agkozak/zsh-z
+
+#Collection of plugins that Arch supports in official repos (i.e. they're good as fuck)
+zsh-users/zsh-autosuggestions #THIS IS GODLY
+zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
+
+#Themes
+Powerlevel9k/powerlevel9k
+
+## You can get Oh-My-Zsh plugins without the garbage that is oh-my-zsh
+#ohmyzsh/ohmyzsh path:plugins/<put omz plugin here>
