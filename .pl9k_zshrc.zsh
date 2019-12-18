@@ -37,11 +37,12 @@ POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%K{white}%F{black} (dir) %f%k%F{white}%f "
 
 #You can hack in a custom element somewhat easily with PL9K:
+#   TODO: Make an actual, proper custom zsh element (widget, w/e)
 POWERLEVEL9K_CUSTOM_CLOCK_STAT='~/.local/bin/clp_state.zsh'
 POWERLEVEL9K_CUSTOM_CLOCK_STAT_BACKGROUND='white'
 POWERLEVEL9K_CUSTOM_CLOCK_STAT_FOREGROUND='black'
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode root_indicator context virtualenv anaconda dir dir_writable vcs newline custom_clock_stat)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(vi_mode root_indicator dir virtualenv anaconda context dir_writable vcs newline custom_clock_stat)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status background_jobs time)
 
 ###Customize L and R prompt elements in Powerlevel9k

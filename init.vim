@@ -155,14 +155,20 @@ if filereadable(expand(s:nvim_plug_script))
 
     " This set of plugins was rec'd in 'Vim for Python' on Vim from Scratch website
     " TODO: Actually use these, learn them, and keep what's good
-    Plug 'scrooloose/nerdtree'
+    "Plug 'scrooloose/nerdtree' "I think I'm replacing this with a neovim
+    "   internal terminal including vifm.  Maybe not as portable, but I wanna try it
+   
+    " Practice: 
     Plug 'junegunn/fzf'
+    " simple: just gcc to toggle comment of a line, gc to do it to vis selection
     Plug 'tpope/vim-commentary'
+    " FUCKING INCREDIBLE, JUST TYPE :Vista FOR MAGIC
+    "   TODO: learn about customization and power use on the github
     Plug 'liuchengxu/vista.vim'
-    Plug 'jeetsukumaran/vim-pythonsense'
+    Plug 'jeetsukumaran/vim-pythonsense' " maybe get rid of it? cool, but I think I get similar mobility out of vista.  def try later
     Plug 'joshdick/onedark.vim'
-    Plug 'Vimjas/vim-python-pep8-indent'
-    Plug 'dense-analysis/ale'
+    Plug 'Vimjas/vim-python-pep8-indent' " look into customizing after you get used to it
+    Plug 'dense-analysis/ale' " supposed to use linting tools to lint... guess I'll see
     if has('nvim')
         " this breaks for me, for some reason
         " Plug 'numirias/semshi'
