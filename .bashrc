@@ -177,6 +177,23 @@ case `hostname` in
     alias cat="bat"
     alias ls="exa --group-directories-first"
     ;;
+## pixel-c, a tablot with Arch Linux ARM on it
+"pixel-c")
+    set_ps1 "/usr/share/git/completion/git-prompt.sh"
+
+    # Make sure Emacs and others know we have 256 color
+    export TERM=xterm-256color
+    
+    # nvim's available, let's use it!
+    export EDITOR=nvim
+    alias vim=nvim
+
+    export OMP_NUM_THREADS=2
+
+    # Try this on siona, maybe make global later
+    alias cat="bat"
+    alias ls="exa --group-directories-first"
+    ;;
 ## iCER / HPCC configuration
 "gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14" | "dev-intel14-phi" |  "dev-intel14-k20" )
     set_ps1

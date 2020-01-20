@@ -324,7 +324,7 @@ set background=dark " use `light` for light version
 "colorscheme lucius "needs `set background=dark`
 
 " Configure airline
-let g:airline_powerline_fonts = 1 " NOTE: This requires you have powerline
+"let g:airline_powerline_fonts = 1 " NOTE: This requires you have powerline
                                   " fonts installed for your local terminal or
                                   " GUI (e.g. GVIM, MacVim).  It is my current
                                   " understanding that you do NOT need them
@@ -335,16 +335,28 @@ let g:airline_powerline_fonts = 1 " NOTE: This requires you have powerline
                                   " distribution's package manager has powerline
                                   " fonts.
 
-"let g:airline_symbols_ascii = 1
-"let g:airline_theme='raven'       " See :help airline-themes-list for full list
-let g:airline_theme='one'
+let g:airline_symbols_ascii = 1
+let g:airline_theme='base16_google'
 
+"let g:airline_theme='raven'       " See :help airline-themes-list for full list
+"let g:airline_theme='powerlineish'
 "let g:airline_theme='tomorrow'
 "let g:airline_theme='luna'
 "let g:airline_theme='papercolor'
 "let g:airline_theme='bubblegum'
 "let g:airline_theme='wombat'
-"let g:airline_theme='base16color'
+
+"let g:airline_theme='base16_adwaita'
+"let g:airline_theme='base16_nord'
+"let g:airline_theme='base16_atelierdune'
+"let g:airline_theme='base16_atelierlakeside'
+"let g:airline_theme='base16_chalk'
+"let g:airline_theme='base16_grayscale'
+"let g:airline_theme='base16_harmonic16'
+"let g:airline_theme='base16_isotope'
+"let g:airline_theme='base16_paraiso'
+"let g:airline_theme='base16_pop'
+"let g:airline_theme='base16_shapeshifter'
 
 " Don't display file encoding if it's the expected 'utf-8[unix]'
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
