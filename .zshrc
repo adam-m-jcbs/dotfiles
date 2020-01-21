@@ -17,6 +17,9 @@ if [[ -f /usr/share/fzf/completion.zsh ]]; then
     source /usr/share/fzf/completion.zsh
 fi
 
+# Some things pay attention to this, set language:
+export LANG="en_US.UTF-8"
+
 # Set preferred editor, pager
 export EDITOR=vim
 export PAGER=less
@@ -52,7 +55,7 @@ bindkey -v  # use vi bindings for CLI
 bindkey '^ ' autosuggest-accept # CTRL + SPACE will complete autosuggestions (tabs are for completion)
 
 ### aliases
-#alias ls='ls --color --group-directories-first'
+alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
 alias mypubip='dig +short myip.opendns.com @resolver1.opendns.com'
 
@@ -93,7 +96,7 @@ fi
 
 # This will set the default prompt to the adam2 theme
 #prompt adam2
-source ~/.pl9k_zshrc.zsh
+source $HOME/.pl9k_zshrc.zsh
 
 ### zsh completion tweaks
 zstyle ':completion:*' menu select    # gives arrow-driven completion menu
