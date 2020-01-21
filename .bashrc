@@ -19,6 +19,7 @@ alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
 alias clean_tex='rm *.aux *.log'
 alias cdsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
+alias mypubip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # use vi bindings for CLI
 set -o vi
@@ -176,6 +177,9 @@ case `hostname` in
     # Try this on siona, maybe make global later
     alias cat="bat"
     alias ls="exa --group-directories-first"
+
+    # For Insight
+    source /home/ajacobs/.profile
     ;;
 ## pixel-c, a tablot with Arch Linux ARM on it
 "pixel-c")

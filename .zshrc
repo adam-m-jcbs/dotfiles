@@ -54,6 +54,7 @@ bindkey '^ ' autosuggest-accept # CTRL + SPACE will complete autosuggestions (ta
 ### aliases
 #alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
+alias mypubip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 ### Research and code configuration
 
@@ -92,7 +93,7 @@ fi
 
 # This will set the default prompt to the adam2 theme
 #prompt adam2
-source .pl9k_zshrc.zsh
+source ~/.pl9k_zshrc.zsh
 
 ### zsh completion tweaks
 zstyle ':completion:*' menu select    # gives arrow-driven completion menu
@@ -214,6 +215,9 @@ case `hostname` in
     # Try this on siona, maybe make global later
     alias cat="bat"
     alias ls="exa --group-directories-first"
+
+    # For insight
+    source /home/ajacobs/.profile
     ;;
 ### iCER / HPCC configuration
 "gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14" | "dev-intel14-phi" |  "dev-intel14-k20" )
