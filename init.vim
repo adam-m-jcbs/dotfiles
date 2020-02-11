@@ -446,3 +446,7 @@ nnoremap <leader>r :CtrlPMRUFiles<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 " ,n --> open up netrw in a vertical split, browsing the cwd
 nnoremap <leader>n :Lexplore .<CR>
+
+" For the pixelc keyboard, nice to have ESC remapped in insert mode
+" in insert mode, "kj" --> ESC
+inoremap kj <Esc>
