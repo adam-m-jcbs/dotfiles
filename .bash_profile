@@ -1,15 +1,8 @@
 #!/bin/bash
+#
+# ~/.bash_profile
+#
 
-# Common for all hosts
-
-# .bashrc is sometimes sourced in login shells, sometimes not.
-# For consistency, just always do it.  I do it last because I want PATH changes
-# in .bashrc to take precedence of those from modules.
-# TODO: Would be nice to only do when needed. Does this mean .bashrc can be
-#   sourced twice?  Will it make my $PATH ugly?
-if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
-fi
 
 # Titan login shell preferences 
 if [ `expr match "$HOSTNAME" 'titan'` -gt 0 ] 
@@ -105,3 +98,10 @@ then
 
     #source ${HOME}/PyVE/bin/activate
 fi
+
+# Common for all hosts
+
+# .bashrc is sometimes sourced in login shells, sometimes not.
+# For consistency, just always do it.  I do it last because I want PATH changes
+# in .bashrc to take precedence of those from modules.
+[[ -f ~/.bashrc ]] && . ~/.bashrc
