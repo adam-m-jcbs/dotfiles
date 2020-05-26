@@ -11,10 +11,9 @@
 "   + Language and Filetype Settings 
 "   + Mappings, Functions, and Other Custom Definitions
 
-" Testing this and other .vim files:
-" (http://vim.wikia.com/wiki/Vim_as_a_system_interpreter_for_vimscript)
-" You can use vim like a system interpreter to test this file and other
-" vimscripts (usually .vim files) from the commandline with:
+" To test this file and all .vim files:
+" (source: http://vim.wikia.com/wiki/Vim_as_a_system_interpreter_for_vimscript)
+" You can use vim like a system interpreter to test vimscripts from the CLI:
 " $ vim -i NONE -u NORC -U NONE -V1 -nNesS file.vim -c'echo""|qall!' -- args...
 "   -i NONE --> Don't bother with viminfo file
 "   -u NORC --> No rc file, don't initialize with vimrc. Implied with -s, kept
@@ -208,9 +207,12 @@ if filereadable(expand(s:nvim_plug_script))
 endif
 
 if !has('nvim')
-    " If we're not in neovim, use the same defaults as neovim.  Some options may
-    " be set again later.  This just makes sure that after this point there
-    " should be consistency between using this vimrc in vim and neovim.
+    " If we're not in neovim, we hardcode the defaults used in neovim.
+    " This serves to give a more consistent experience when using this init.vim for
+    " both vim and neovim.
+
+    " WARNING: Do not customize these!  You can set them to custom values in
+    " later sections of this init.vim file.
     set backspace=indent,eol,start   " allow backspacing over everything
                                      " in insert mode
     set history=10000 " keep 10000 lines of command line history (maximum)
