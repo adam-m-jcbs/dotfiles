@@ -1,13 +1,14 @@
 # .bashrc
 
-# If not running interactively, don't do anything
-# TODO: do I want this? I could see this being bad for clusters where I still
-#   need my PATH and such set for many scripts to work.
-[[ $- != *i* ]] && return
+# If not running interactively, exit with err status 1
+# Note: the common practice of having `return` instead of `exit 1` is 
+#       often a syntax error (invalid `return`), which isn't helpful for users.
+#       I indicate an error with `exit 1`.  You can ignore this error 
+#       (running .bashrc non-interactively) with `exit 0`
+[[ $- != *i* ]] && exit 1
 
 # Source global definitions
-#   NOTE: This broke some stuff for me on some machines.  I'm seeing how going
-#   without it works.  TODO delete this if no problems
+# Note: I comment this out as I use this .bashrc widely and it is not guaranteed to work broadly.  However, for a single-machine .bashrc, this is good practice to make sure you have your OS's bashrc config
 #if [ -f /etc/bashrc ]; then
 #    . /etc/bashrc
 #fi
@@ -17,8 +18,6 @@
 # aliases
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
-alias clean_tex='rm *.aux *.log'
-alias cdsens='cd ~/Research/Projects/XRB/Sensitivity/' #goto sensitivity dir
 alias mypubip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 # use vi bindings for CLI
@@ -128,6 +127,15 @@ function init_gems {
 
 ###Host-by-host customizations
 case `hostname` in
+## sunha, my Lenovo P53 laptop
+"sunha")
+    set_ps1 "/usr/share/git/completion/git-prompt.sh"
+
+    # Some applications use this, let them know we have 256 color
+    export TERM=xterm-256color
+    
+    export OMP_NUM_THREADS=6
+    ;;
 ## xrb configuration
 "xrb.pa.msu.edu")
     set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
@@ -181,7 +189,7 @@ case `hostname` in
     # For Insight
     source /home/ajacobs/.profile
     ;;
-## pixel-c, a tablot with Arch Linux ARM on it
+## pixel-c, a tablet with Arch Linux ARM on it
 "pixel-c")
     set_ps1 "/usr/share/git/completion/git-prompt.sh"
 
