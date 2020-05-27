@@ -28,7 +28,7 @@ export PAGER=less
 typeset -U PATH path #Makes it so only unique items are added to PATH env variable or path array (which mirrors env var)
 path=("$HOME/.local/bin" "$path[@]")
 export PATH
-# Old bash way of doing it, for reference:
+# bash way of doing it, for reference:
 #export PATH=${PATH}:${HOME}/.local/bin
 
 ### zsh init code
@@ -96,7 +96,16 @@ fi
 
 # This will set the default prompt to the adam2 theme
 #prompt adam2
-source $HOME/.pl9k_zshrc.zsh
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 ### zsh completion tweaks
 zstyle ':completion:*' menu select    # gives arrow-driven completion menu
@@ -169,6 +178,16 @@ function init_gems {
 
 ##Host-by-host customizations
 case `hostname` in
+## sunha, my Lenovo P53 laptop
+"sunha")
+    # Some applications use this, let them know we have 256 color
+    export TERM=xterm-256color
+    
+    export OMP_NUM_THREADS=6
+
+    # Enable conda per-user
+    source /opt/miniconda3/etc/profile.d/conda.sh
+    ;;
 ### xrb configuration
 "xrb.pa.msu.edu")
     #set_ps1 "/usr/share/git-core/contrib/completion/git-prompt.sh"
@@ -293,4 +312,9 @@ esac
 # NOTE: MUST BE LAST
 if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    if [[ -f /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]]; then
+        #NOTE: This was included with a pl10k install into the .zshrc.  It may be
+        #needed to work with arch's zsh syntax highlighting?
+        source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+    fi
 fi
