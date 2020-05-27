@@ -135,6 +135,9 @@ case `hostname` in
     export TERM=xterm-256color
     
     export OMP_NUM_THREADS=6
+
+    # Enable conda per-user
+    source /opt/miniconda3/etc/profile.d/conda.sh
     ;;
 ## xrb configuration
 "xrb.pa.msu.edu")
