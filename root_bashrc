@@ -1,0 +1,28 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color --group-directories-first'
+
+
+# For a complete list of bash PS backslash-escaped special characters see
+# PROMPTING in bash man page.  The include:
+#   \h      first part of hostname (host.mine.com --> host)
+#   \H      full hostname
+#   \n, \r  newline, carriage return
+#   \t      current time in 24-hour HH:MM:SS format
+#   \A      same but                HH:MM
+#   \u      current user's username
+#   \w      current working directory, $HOME becomes ~
+#   \W      cwd basename
+#   \[      start sequence of non-printing characters
+#   \]      end sequence of non-printing characters
+#   \e      ASCII/ANSI escape
+#           http://ascii-table.com/ansi-escape-sequences.php 
+#	    30:Black 31:Red 32:Green 33:Yellow 34:Blue 35:Magenta
+#           36:Cyan  37:White
+#PS1='[\u@\h \W]\$ '
+PS1='[\[\e[1;35m\]\u\[\e[0m\]@\h \W]\$ '
