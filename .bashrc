@@ -188,9 +188,6 @@ case `hostname` in
     # Try this on siona, maybe make global later
     alias cat="bat"
     alias ls="exa --group-directories-first"
-
-    # For Insight
-    source /home/ajacobs/.profile
     ;;
 ## pixel-c, a tablet with Arch Linux ARM on it
 "pixel-c")
