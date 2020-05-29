@@ -237,9 +237,6 @@ case `hostname` in
     # Try this on siona, maybe make global later
     alias cat="bat"
     alias ls="exa --group-directories-first"
-
-    # For insight
-    source /home/ajacobs/.profile
     ;;
 ### iCER / HPCC configuration
 "gateway-*" | "dev-intel16-k80" | "dev-intel16" | "dev-intel14" | "dev-intel14-phi" |  "dev-intel14-k20" )
