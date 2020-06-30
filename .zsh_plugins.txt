@@ -13,7 +13,7 @@ zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
 
 #Themes
-Powerlevel9k/powerlevel9k
+#Powerlevel9k/powerlevel9k
 
 ## You can get Oh-My-Zsh plugins without the garbage that is oh-my-zsh
 #ohmyzsh/ohmyzsh path:plugins/<put omz plugin here>
