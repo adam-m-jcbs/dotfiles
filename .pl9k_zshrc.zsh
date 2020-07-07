@@ -38,6 +38,7 @@ POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
 
 #You can hack in a custom element somewhat easily with PL9K:
 #   TODO: Make an actual, proper custom zsh element (widget, w/e)
+#   This will provide a `custom_clock_stat` prompt element
 POWERLEVEL9K_CUSTOM_CLOCK_STAT='~/.local/bin/clp_state.zsh'
 POWERLEVEL9K_CUSTOM_CLOCK_STAT_BACKGROUND='white'
 POWERLEVEL9K_CUSTOM_CLOCK_STAT_FOREGROUND='black'
