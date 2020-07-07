@@ -105,7 +105,8 @@
     # proxy                 # system-wide http/https/ftp proxy
     # battery               # internal battery
     # wifi                  # wifi speed
-    # example               # example user-defined segment (see prompt_example function below)
+    #example               # example user-defined segment (see prompt_example function below)
+    clock_stat
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
@@ -1402,7 +1403,7 @@
   typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='${P9K_IP_RX_RATE:+%70F⇣$P9K_IP_RX_RATE }${P9K_IP_TX_RATE:+%215F⇡$P9K_IP_TX_RATE }%38F$P9K_IP_IP'
   # Show information for the first network interface whose name matches this regular expression.
   # Run `ifconfig` or `ip -4 a show` to see the names of all network interfaces.
-  typeset -g POWERLEVEL9K_IP_INTERFACE='e.*'
+  typeset -g POWERLEVEL9K_IP_INTERFACE='wlan.*'
   # Custom icon.
   # typeset -g POWERLEVEL9K_IP_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -1476,6 +1477,20 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
+  }
+
+  # Example of a user-defined prompt segment. Function prompt_example will be called on every
+  # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
+  # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS. It displays an icon and orange text greeting the user.
+  #
+  # Type `p10k help segment` for documentation and a more sophisticated example.
+  function prompt_clock_stat() {
+    seg_text=`cat /home/ajacobs/.clock_log/state`
+    # todo: properly use the variable instead of hard-coding (definted as "typeset -g POWERLEVEL9K_TIME_FOREGROUND=66)
+    p10k segment -f 66 -t $seg_text
+
+
+
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
