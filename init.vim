@@ -122,16 +122,22 @@ if filereadable(expand(s:nvim_plug_script))
     call plug#begin(s:nvim_plugin_dir)
  
     " Make sure you use single quotes with `Plug` commands (not sure why)
- 
+
+    " Enable built-in language server protocol (LSP) client (in nvim 0.5+)
+    if has('nvim')
+        Plug 'neovim/nvim-lspconfig'
+    endif
+
+    " Popular nodeJS-based code completion extension engine, can work with
+    " various VSCode extensions, I think
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Can manage some plugins with :CocInstall <ext>, 
+    "   see https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions for list
+    let g:coc_global_extensions = ['@yaegassy/coc-ansible']
+
     " Git integration, wrapping in vim
     "    TODO: Practice using this
     Plug 'tpope/vim-fugitive'
- 
-    " TODO: A linter that works with non-trivial fortran would be nice
-    "    -Couldn't get syntastic working w/ neovim
-    "    -Neomake can't readily handle non-trivial Fortran (if it can, it's not
-    "    documented well imo).
-    "Plug 'neomake/neomake'
  
     " Nice statusline.  Note: powerline doesn't seem to integrate into neovim
     " yet, so I use vim-airline, which is a bit simpler anyway
@@ -154,8 +160,16 @@ if filereadable(expand(s:nvim_plug_script))
 
     " This set of plugins was rec'd in 'Vim for Python' on Vim from Scratch website
     " TODO: Actually use these, learn them, and keep what's good
-    "Plug 'scrooloose/nerdtree' "I think I'm replacing this with a neovim
-    "   internal terminal including vifm.  Maybe not as portable, but I wanna try it
+    
+    "Plug 'scrooloose/nerdtree' "In between maintainers, not as nvim-friendly
+    "   nvim-tree seems to be the new tree browser for neovim
+    if has('nvim')
+        Plug 'kyazdani42/nvim-web-devicons' 
+        Plug 'kyazdani42/nvim-tree.lua'
+    endif
+    "lua << EOF
+    "config = function() require'nvim-tree'.setup() end
+    "EOF
    
     " Practice: 
     Plug 'junegunn/fzf'
@@ -164,17 +178,11 @@ if filereadable(expand(s:nvim_plug_script))
     " FUCKING INCREDIBLE, JUST TYPE :Vista FOR MAGIC
     "   TODO: learn about customization and power use on the github
     Plug 'liuchengxu/vista.vim'
-    Plug 'jeetsukumaran/vim-pythonsense' " maybe get rid of it? cool, but I think I get similar mobility out of vista.  def try later
+    "Plug 'jeetsukumaran/vim-pythonsense' " maybe get rid of it? cool, but I think I get similar mobility out of vista.  def try later
     Plug 'joshdick/onedark.vim'
     Plug 'Vimjas/vim-python-pep8-indent' " look into customizing after you get used to it
     Plug 'dense-analysis/ale' " supposed to use linting tools to lint... guess I'll see
-    if has('nvim')
-        " this breaks for me, for some reason
-        " Plug 'numirias/semshi'
-        Plug 'sheerun/vim-polyglot'
-    else
-        Plug 'sheerun/vim-polyglot'
-    endif
+    Plug 'sheerun/vim-polyglot'
 
     "TODO consider these plugins
     "Plugin 'NLKNguyen/papercolor-theme'
@@ -379,30 +387,96 @@ let g:airline#extensions#tabline#enabled = 2 " always show tabs
 "==============================================================================
 " Browsing, Buffers, Panes, and Tabs
 "==============================================================================
-" Configure vim's built-in directory browser, netrw
-" TODO: default session with file/tag browsing?
-" NOTE: Many people love NERDTree, but until I find a compelling motivation for
-"   adding a new plugin/dependency I'm sticking with the built-in netrw.  This
-"   section pulls from 
-"   http://ellengummesson.com/blog/2014/02/22/make-vim-really-behave-like-netrw/
-let g:netrw_liststyle=3       " Default to a tree list view
-let g:netrw_banner=0          " Get rid of the banner
-let g:netrw_browse_split=4    " Open files in the previous window to the right
-let g:netrw_altv=1
-let g:netrw_winsize=20        " Set the width of the netrw window
-                              " to 15% of the screen width
-let g:netrw_list_hide = &wildignore  " Use same wildignore as rest of vim
+" Configure directory/file browsing 
 
 if has('nvim')
-   " Configure terminal emulator buffers
-   augroup term_em
-      au!
-      " Always start in insert mode when moving to a terminal buffer
-      autocmd BufWinEnter,WinEnter term://* startinsert
-      " Turn off spell checking in terminal buffer
-      autocmd TermOpen             *        set nospell
-   augroup END
-endif 
+lua << EOF
+require'nvim-tree'.setup {
+  disable_netrw       = true,
+  hijack_netrw        = true,
+  open_on_setup       = false,
+  ignore_ft_on_setup  = {},
+  auto_close          = false,
+  open_on_tab         = false,
+  hijack_cursor       = false,
+  update_cwd          = false,
+  update_to_buf_dir   = {
+    enable = true,
+    auto_open = true,
+  },
+  diagnostics = {
+    enable = false,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  update_focused_file = {
+    enable      = false,
+    update_cwd  = false,
+    ignore_list = {}
+  },
+  system_open = {
+    cmd  = nil,
+    args = {}
+  },
+  filters = {
+    dotfiles = false,
+    custom = {}
+  },
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 500,
+  },
+  view = {
+    width = 30,
+    height = 40,
+    hide_root_folder = false,
+    side = 'left',
+    auto_resize = true,
+    mappings = {
+      custom_only = false,
+      list = {}
+    },
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes"
+  },
+  trash = {
+    cmd = "trash",
+    require_confirm = true
+  }
+}
+EOF
+endif
+
+"#"netrw
+"#" TODO: default session with file/tag browsing?
+"#" NOTE: Many people love NERDTree, but until I find a compelling motivation for
+"#"   adding a new plugin/dependency I'm sticking with the built-in netrw.  This
+"#"   section pulls from 
+"#"   http://ellengummesson.com/blog/2014/02/22/make-vim-really-behave-like-netrw/
+"#let g:netrw_liststyle=3       " Default to a tree list view
+"#let g:netrw_banner=0          " Get rid of the banner
+"#let g:netrw_browse_split=4    " Open files in the previous window to the right
+"#let g:netrw_altv=1
+"#let g:netrw_winsize=20        " Set the width of the netrw window
+"#                              " to 15% of the screen width
+"#let g:netrw_list_hide = &wildignore  " Use same wildignore as rest of vim
+"#
+"#if has('nvim')
+"#   " Configure terminal emulator buffers
+"#   augroup term_em
+"#      au!
+"#      " Always start in insert mode when moving to a terminal buffer
+"#      autocmd BufWinEnter,WinEnter term://* startinsert
+"#      " Turn off spell checking in terminal buffer
+"#      autocmd TermOpen             *        set nospell
+"#   augroup END
+"#endif 
 
 "==============================================================================
 " Language and Filetype Settings 
