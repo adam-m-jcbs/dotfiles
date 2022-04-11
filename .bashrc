@@ -19,6 +19,7 @@
 alias ls='ls --color --group-directories-first'
 alias gist='git status -uno'
 alias mypubip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias ansible-encrypt-string='ansible-vault encrypt_string --vault-id @prompt'
 
 # use vi bindings for CLI
 set -o vi
