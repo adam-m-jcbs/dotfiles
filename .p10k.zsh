@@ -1485,12 +1485,11 @@
   #
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_clock_stat() {
-    seg_text=`cat /home/ajacobs/.clock_log/state`
-    # todo: properly use the variable instead of hard-coding (definted as "typeset -g POWERLEVEL9K_TIME_FOREGROUND=66)
-    p10k segment -f 66 -t $seg_text
-
-
-
+    if [[ -f "/home/ajacobs/.clock_log/state" ]]; then
+        seg_text=`cat /home/ajacobs/.clock_log/state`
+        # todo: properly use the variable instead of hard-coding (definted as "typeset -g POWERLEVEL9K_TIME_FOREGROUND=66)
+        p10k segment -f 66 -t $seg_text
+    fi
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
